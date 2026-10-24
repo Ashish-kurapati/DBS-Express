@@ -1,0 +1,189 @@
+export const sourceSite = 'https://db-ssubmit.vercel.app'
+export const signUpUrl = 'https://www.dbs-express.co.uk/app/ci/index_controller/sign_up'
+export const loginUrl = 'https://www.dbs-express.co.uk/app/login_direct'
+
+export const navigation = [
+  { label: 'Employers', href: `${sourceSite}/employers` },
+  { label: 'Individuals', href: `${sourceSite}/individuals` },
+  { label: 'Pricing', href: `${sourceSite}/pricing` },
+  { label: 'Resources', href: `${sourceSite}/resources` },
+  { label: 'About', href: `${sourceSite}/about` },
+  { label: 'FAQ', href: `${sourceSite}/faq` },
+  { label: 'Contact', href: `${sourceSite}/contact` },
+]
+
+// Client verification required before display: these promotional claims are retained as source material.
+export const benefits = [
+  {
+    title: 'Built for SMEs & high-volume teams',
+    description: 'Pay for what you use, with no contracts',
+  },
+  {
+    title: 'Turnaround times',
+    description: 'Same-day processing before 4pm',
+  },
+  {
+    title: 'UK compliance made simple',
+    description: 'DBS certificate dispatch information',
+  },
+]
+
+// Authenticity, attribution, and publication permission must be confirmed before display.
+export const testimonials = [
+  {
+    quote:
+      'DBS-Express took the guesswork out of screening new starters: the pricing is upfront and the checks come back quickly.',
+    name: 'Sarah Whitfield',
+    role: 'HR Manager, Northgate Care Group',
+  },
+  {
+    quote: 'Setup took ten minutes and our first check was back in three days.',
+    name: 'Michael Ossai',
+    role: 'Operations Lead · Fenwick Logistics',
+  },
+  {
+    quote: 'Finally a DBS provider that publishes its prices upfront.',
+    name: 'Priya Anand',
+    role: 'People Partner · Anand & Co Recruitment',
+  },
+  {
+    quote: 'Support actually replies, which is rare in this industry.',
+    name: 'Tom Beckett',
+    role: 'Founder · Beckett Property Management',
+  },
+]
+
+// Preserve the original values; do not display until the client verifies source and context.
+export const statistics = [
+  {
+    value: '99.4%',
+    label: 'First-time application accuracy rate across all sectors',
+  },
+  {
+    value: '< 24h',
+    label: 'Average turnaround for electronic Basic check results',
+  },
+  {
+    value: '50k+',
+    label: 'UK criminal record checks processed annually',
+  },
+]
+
+// Public-page values retained for comparison; confirm the current approved fee schedule before display.
+export const pricingTiers = [
+  {
+    tier: 'Tier 1',
+    volume: '1 to 99 checks per year',
+    basicStandard: '£37.70',
+    enhanced: '£65.70',
+  },
+  {
+    tier: 'Tier 2',
+    volume: '100 to 499 checks per year',
+    basicStandard: '£35.30',
+    enhanced: '£63.30',
+  },
+  {
+    tier: 'Tier 3',
+    volume: '500 to 1,499 checks per year',
+    basicStandard: '£34.10',
+    enhanced: '£62.10',
+  },
+]
+
+export const pricingPageUrl = `${sourceSite}/pricing`
+
+// Confirm current availability and wording with the client before display.
+export const integrations = [
+  {
+    number: '01',
+    title: 'Build with API',
+    description: 'Developer-First Automation',
+    details: [
+      'Direct REST endpoints for applicant dispatch and tracking',
+      'Instant webhook notifications as soon as certificates are issued',
+    ],
+  },
+  {
+    number: '02',
+    title: 'Partner integrations',
+    description: 'Prebuilt Zero-Code Connectors',
+    details: [
+      'Plug-and-play connectors for leading HR and ATS platforms',
+      'Automated candidate status sync with zero manual re-entry',
+    ],
+  },
+  {
+    number: '03',
+    title: 'Native web portal',
+    description: 'Zero Setup or Coding',
+    details: [
+      'Dedicated cloud portal to invite candidates and monitor progress',
+      'Automated candidate SMS reminders and instant digital downloads',
+    ],
+  },
+]
+
+// Confirm process steps and service details with the client before display.
+export const workflow = [
+  {
+    title: 'Candidate & Role Setup',
+    description:
+      'Enter applicant details, assign company departments, and use our smart eligibility questionnaire to determine the lawful DBS level (Basic, Standard, or Enhanced).',
+  },
+  {
+    title: 'Bundle Checks & Digital ID',
+    description:
+      'Select DBS checks and available additional services, including Right to Work verification, Digital ID, and reference checks.',
+  },
+  {
+    title: 'Track & Receive Results',
+    description:
+      'Follow application status, export compliance records, and receive results. The website says paper certificates are dispatched.',
+  },
+]
+
+export const footerGroups = [
+  {
+    title: 'Services',
+    links: [
+      ['Basic DBS check', '/pricing'],
+      ['Standard DBS check', '/pricing'],
+      ['Enhanced DBS check', '/pricing'],
+      ['Rate matrix & pricing', '/pricing'],
+    ],
+  },
+  {
+    title: 'Solutions',
+    links: [
+      ['Employers & HR teams', '/employers'],
+      ['Individual applicants', '/individuals'],
+      ['Portal login →', loginUrl],
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      ['Blog & guidance', '/resources'],
+      ['Knowledge base & FAQ', '/faq'],
+      ['System status', '/maintenance'],
+      ['Offline & connectivity help', '/offline'],
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      ['About DBS-Express', '/about'],
+      ['Contact support', '/contact'],
+      ['Meet the team', '/team'],
+      ['Company policies', '/policies'],
+      ['Privacy policy', '/privacy-policy'],
+      ['Terms & conditions', '/terms'],
+      ['Cookie policy', '/privacy-policy'],
+    ],
+  },
+]
+
+export function sourceLink(path: string) {
+  return path.startsWith('https://') ? path : `${sourceSite}${path}`
+}
