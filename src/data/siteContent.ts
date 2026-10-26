@@ -3,13 +3,13 @@ export const signUpUrl = 'https://www.dbs-express.co.uk/app/ci/index_controller/
 export const loginUrl = 'https://www.dbs-express.co.uk/app/login_direct'
 
 export const navigation = [
-  { label: 'Employers', href: `${sourceSite}/employers` },
-  { label: 'Individuals', href: `${sourceSite}/individuals` },
-  { label: 'Pricing', href: `${sourceSite}/pricing` },
-  { label: 'Resources', href: `${sourceSite}/resources` },
-  { label: 'About', href: `${sourceSite}/about` },
-  { label: 'FAQ', href: `${sourceSite}/faq` },
-  { label: 'Contact', href: `${sourceSite}/contact` },
+  { label: 'Employers', href: '/employers' },
+  { label: 'Individuals', href: '/individuals' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'About', href: '/about' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 // Client verification required before display: these promotional claims are retained as source material.
@@ -29,7 +29,13 @@ export const benefits = [
 ]
 
 // Authenticity, attribution, and publication permission must be confirmed before display.
-export const testimonials = [
+export const testimonials: Array<{
+  quote: string
+  name: string
+  role: string
+  image?: string
+  initials?: string
+}> = [
   {
     quote:
       'DBS-Express took the guesswork out of screening new starters: the pricing is upfront and the checks come back quickly.',
@@ -39,16 +45,21 @@ export const testimonials = [
   {
     quote: 'Setup took ten minutes and our first check was back in three days.',
     name: 'Michael Ossai',
+    image: '/assets/michael-ossai.png',
+    initials: 'MO',
     role: 'Operations Lead · Fenwick Logistics',
   },
   {
     quote: 'Finally a DBS provider that publishes its prices upfront.',
     name: 'Priya Anand',
+    image: '/assets/priya-anand.png',
+    initials: 'PA',
     role: 'People Partner · Anand & Co Recruitment',
   },
   {
     quote: 'Support actually replies, which is rare in this industry.',
     name: 'Tom Beckett',
+    initials: 'TB',
     role: 'Founder · Beckett Property Management',
   },
 ]
@@ -176,6 +187,11 @@ export const footerGroups = [
       ['About DBS-Express', '/about'],
       ['Contact support', '/contact'],
       ['Meet the team', '/team'],
+    ],
+  },
+  {
+    title: 'Legal & compliance',
+    links: [
       ['Company policies', '/policies'],
       ['Privacy policy', '/privacy-policy'],
       ['Terms & conditions', '/terms'],
@@ -185,5 +201,5 @@ export const footerGroups = [
 ]
 
 export function sourceLink(path: string) {
-  return path.startsWith('https://') ? path : `${sourceSite}${path}`
+  return path.startsWith('https://') ? path : path
 }

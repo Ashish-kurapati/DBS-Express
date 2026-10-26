@@ -25,6 +25,7 @@ export function useScrollRevealContainer<T extends HTMLElement>() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-revealed')
+            entry.target.classList.remove('will-reveal')
             observer.unobserve(entry.target)
           }
         })
@@ -35,43 +36,38 @@ export function useScrollRevealContainer<T extends HTMLElement>() {
       },
     )
 
-    elements.forEach((el) => observer.observe(el))
+    elements.forEach((el) => {
+      const bounds = el.getBoundingClientRect()
+      if (bounds.top < window.innerHeight * 0.9 && bounds.bottom > 0) {
+        el.classList.add('is-revealed')
+        return
+      }
 
-    return () => observer.disconnect()
+      el.classList.add('will-reveal')
+      observer.observe(el)
+    })
+
+    const revealVisibleElements = () => {
+      elements.forEach((el) => {
+        if (!el.classList.contains('will-reveal')) return
+        const bounds = el.getBoundingClientRect()
+        if (bounds.top < window.innerHeight * 0.9 && bounds.bottom > 0) {
+          el.classList.add('is-revealed')
+          el.classList.remove('will-reveal')
+          observer.unobserve(el)
+        }
+      })
+    }
+
+    window.addEventListener('scroll', revealVisibleElements, { passive: true })
+    window.addEventListener('resize', revealVisibleElements)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', revealVisibleElements)
+      window.removeEventListener('resize', revealVisibleElements)
+    }
   }, [])
 
   return containerRef
-}
-
-/**
- * Hook for a single element ref scroll reveal
- */
-export function useReveal<T extends HTMLElement>(threshold = 0.15) {
-  const ref = useRef<T>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedMotion || typeof IntersectionObserver === 'undefined') {
-      el.classList.add('is-revealed')
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-revealed')
-          observer.unobserve(el)
-        }
-      },
-      { threshold },
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
-
-  return ref
 }

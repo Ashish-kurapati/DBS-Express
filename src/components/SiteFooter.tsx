@@ -2,16 +2,11 @@ import { footerGroups, sourceLink } from '../data/siteContent'
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer" id="contact">
+    <footer className="site-footer">
       <div className="footer-main">
         <div className="footer-brand-column">
           <a className="footer-brand" href="/" aria-label="DBS-Express home">
-            <img
-              src="/assets/dbs-express-logo.jpg"
-              alt="DBS-Express"
-              width="320"
-              height="64"
-            />
+            <span aria-hidden="true">DBS-Express</span>
           </a>
           <p>
             Information about Basic, Standard, and Enhanced DBS checks for employers and
@@ -25,9 +20,12 @@ export function SiteFooter() {
               <ul>
                 {group.links.map(([label, path]) => (
                   <li key={label}>
-                    <a href={sourceLink(path)} target="_blank" rel="noreferrer">
+                    <a
+                      href={sourceLink(path)}
+                      {...(path.startsWith('https://') ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    >
                       {label}
-                      <span className="sr-only"> (opens in a new tab)</span>
+                      {path.startsWith('https://') && <span className="sr-only"> (opens in a new tab)</span>}
                     </a>
                   </li>
                 ))}
@@ -37,10 +35,8 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>DBS-Express design preview</p>
-        <a href="/" className="footer-preview-link">
-          Return to prototype selection
-        </a>
+        <p>DBS-Express</p>
+        <p>Basic, Standard and Enhanced DBS checks.</p>
       </div>
     </footer>
   )
