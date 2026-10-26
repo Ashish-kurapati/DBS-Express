@@ -1,35 +1,70 @@
-export function HeroDashboard() {
-  return (
-    <div className="hero-dashboard-preview" role="img" aria-label="DB-Express candidate management dashboard preview">
-      <div className="hero-dashboard-frame">
-        <div className="hero-dashboard-topbar">
-          <span className="dot dot--red" />
-          <span className="dot dot--yellow" />
-          <span className="dot dot--green" />
-          <span className="hero-dashboard-url">app.dbs-express.com</span>
-        </div>
-        <div className="hero-dashboard-image-wrapper">
-          <img
-            src="/assets/candidate-dashboard.jpg"
-            alt="DB-Express user and candidate compliance dashboard"
-            className="hero-dashboard-img"
-            width="800"
-            height="520"
-            loading="eager"
-          />
-          {/* Floating feature pills as shown in the original design */}
-          <div className="hero-floating-pill hero-floating-pill--services" aria-hidden="true">
-            <span className="hero-floating-pill__label">Services Selection:</span>
-            <strong className="hero-floating-pill__title">DBS Check, Free Right to Work, Digital ID</strong>
-            <span className="hero-floating-pill__price">£6.50</span>
-          </div>
+import { useEffect, useRef } from 'react'
 
-          <div className="hero-floating-pill hero-floating-pill--turnaround" aria-hidden="true">
-            <span className="hero-floating-pill__label">Turnaround:</span>
-            <strong className="hero-floating-pill__title">Same-Day Before 4PM</strong>
-            <span className="hero-floating-pill__sub">&middot; Accredited UK Processing</span>
-          </div>
-        </div>
+export function HeroDashboard() {
+  const artworkRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const artwork = artworkRef.current
+    if (!artwork) return
+
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      typeof IntersectionObserver === 'undefined'
+    ) {
+      artwork.classList.add('hero-artwork--fanned')
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        artwork.classList.add('hero-artwork--fanned')
+        observer.disconnect()
+      },
+      { threshold: 0.25 },
+    )
+
+    observer.observe(artwork)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      className="hero-artwork"
+      ref={artworkRef}
+      role="img"
+      aria-label="Illustration of Basic, Standard, and Enhanced DBS check documents"
+    >
+      <div className="hero-artwork__glow" aria-hidden="true" />
+      <div className="hero-document hero-document--basic" aria-hidden="true">
+        <span className="hero-document__eyebrow">DBS CHECK</span>
+        <strong>Basic</strong>
+        <span className="hero-document__line" />
+        <span className="hero-document__line hero-document__line--short" />
+        <span className="hero-document__stamp">01</span>
+      </div>
+      <div className="hero-document hero-document--standard" aria-hidden="true">
+        <span className="hero-document__eyebrow">DBS CHECK</span>
+        <strong>Standard</strong>
+        <span className="hero-document__line" />
+        <span className="hero-document__line hero-document__line--short" />
+        <span className="hero-document__stamp">02</span>
+      </div>
+      <div className="hero-document hero-document--enhanced" aria-hidden="true">
+        <span className="hero-document__eyebrow">DBS CHECK</span>
+        <strong>Enhanced</strong>
+        <span className="hero-document__line" />
+        <span className="hero-document__line hero-document__line--short" />
+        <span className="hero-document__stamp">03</span>
+      </div>
+      <div className="hero-folder" aria-hidden="true">
+        <span className="hero-folder__tab" />
+        <span className="hero-folder__mark">DBS</span>
+        <span className="hero-folder__label">A clearer way to check</span>
+      </div>
+      <div className="hero-artwork__note" aria-hidden="true">
+        <span className="hero-artwork__note-dot" />
+        Basic · Standard · Enhanced
       </div>
     </div>
   )

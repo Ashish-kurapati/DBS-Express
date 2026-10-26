@@ -1,28 +1,25 @@
-import { PrototypePicker } from './pages/PrototypePicker'
-import { PrototypePage, type PrototypeVariant } from './pages/PrototypePage'
-import { PrototypeAAnimated } from './pages/PrototypeAAnimated'
+import { useEffect, useState } from 'react'
+import { HomePage } from './pages/HomePage'
+import { RoutePage } from './pages/RoutePage'
 import './styles/tokens.css'
+import './shaders/threeui.css'
 import './styles/global.css'
 import './styles/site.css'
-import './styles/prototype-a-animated.css'
-
 
 function App() {
-  const route = window.location.pathname.toLowerCase().replace(/\/+$/, '') || '/'
-  if (route === '/prototype-a-animated') {
-    return <PrototypeAAnimated />
+  const getPathname = () => {
+    const current = window.location.pathname
+    return current.endsWith('/index.html') ? '/' : current.replace(/\/$/, '') || '/'
   }
+  const [pathname, setPathname] = useState(getPathname)
 
-  const variants: Record<string, PrototypeVariant> = {
-    '/prototype-a': 'a',
-    '/prototype-b': 'b',
-    '/prototype-c': 'c',
-  } as const
-  const variant = variants[route]
+  useEffect(() => {
+    const handlePopState = () => setPathname(getPathname())
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
-  return variant
-    ? <PrototypePage variant={variant} />
-    : <PrototypePicker />
+  return pathname === '/' ? <HomePage /> : <RoutePage pathname={pathname} />
 }
 
 export default App
