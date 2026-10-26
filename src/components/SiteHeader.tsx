@@ -1,6 +1,7 @@
 import { AnimatedTopDock } from '../shaders/animated-top-dock/AnimatedTopDock'
 
-export function SiteHeader() {
+export function SiteHeader({ variant }: { variant?: string } = {}) {
+  void variant
   return (
     <header className="site-header site-header--animated">
       <div className="site-header__dock">

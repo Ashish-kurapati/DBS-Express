@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { signUpUrl } from '../data/siteContent'
 import { HeroDashboard } from '../components/HeroDashboard'
 import { IntegrationsSection } from '../components/IntegrationsSection'
@@ -190,6 +191,32 @@ function NextStepsSection() {
 
 export function HomePage() {
   const mainRef = useScrollRevealContainer<HTMLElement>()
+
+  useEffect(() => {
+    const handleHash = () => {
+      const rawHash = window.location.hash.replace(/^#/, '').toLowerCase()
+      if (!rawHash) return
+      const targetId =
+        rawHash === 'dbs-checks'
+          ? 'services'
+          : rawHash === 'how-it-works'
+          ? 'workflow'
+          : rawHash === 'faqs'
+          ? 'faq'
+          : rawHash
+
+      const el = document.getElementById(targetId) || document.getElementById(rawHash)
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }, 80)
+      }
+    }
+
+    handleHash()
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [])
 
   return (
     <div className="site-shell">

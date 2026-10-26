@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
  * adding `.is-revealed` when they enter the viewport.
  * Fully respects `prefers-reduced-motion: reduce`.
  */
-export function useScrollRevealContainer<T extends HTMLElement>() {
+export function useScrollRevealContainer<T extends HTMLElement>(threshold = 0.12) {
   const containerRef = useRef<T>(null)
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export function useScrollRevealContainer<T extends HTMLElement>() {
         })
       },
       {
-        threshold: 0.12,
+        threshold,
         rootMargin: '0px 0px -40px 0px',
       },
     )
@@ -71,3 +71,5 @@ export function useScrollRevealContainer<T extends HTMLElement>() {
 
   return containerRef
 }
+
+export const useReveal = useScrollRevealContainer

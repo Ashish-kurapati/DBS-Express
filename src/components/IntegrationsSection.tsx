@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type TouchEvent } from 'react'
+import { useState, type KeyboardEvent } from 'react'
 
 const researchFindings = [
   {
@@ -6,119 +6,46 @@ const researchFindings = [
     title: 'More applications do not guarantee better shortlists.',
     metric: '58% / 33%',
     metricLabel: 'unsuitable / suitable application increases',
-    description:
-      'CIPD found that unsuitable-candidate increases were reported more often than suitable-candidate increases. More applications can add noise, so consistent selection still matters.',
-    source: 'CIPD, Resourcing and talent planning report',
-    date: '22 September 2026',
     href: 'https://www.cipd.org/uk/knowledge/reports/resourcing-surveys/',
-    linkLabel: 'Read the research',
   },
   {
     category: 'DBS eligibility',
     title: 'The role determines the right DBS level.',
     metric: 'ROLE-LED',
     metricLabel: 'eligibility follows the work involved',
-    description:
-      'The DBS says organisations must assess the role and its activities before choosing Basic, Standard, or Enhanced. Standard and Enhanced checks are not general-purpose screening options.',
-    source: 'Disclosure and Barring Service, eligibility guidance',
-    date: 'Updated 13 October 2026',
     href: 'https://www.gov.uk/government/collections/dbs-eligibility-guidance',
-    linkLabel: 'Read the guidance',
   },
   {
     category: 'Right to work',
     title: 'Right-to-work checks come before employment.',
     metric: 'BEFORE HIRE',
     metricLabel: 'a prescribed employer check',
-    description:
-      'The Home Office guide explains what employers must do before employing someone. The related code of practice also requires checks to be carried out consistently and without discrimination.',
-    source: 'UK Visas and Immigration & Immigration Enforcement',
-    date: 'Updated 1 October 2026',
     href: 'https://www.gov.uk/government/publications/right-to-work-checks-employers-guide',
-    linkLabel: 'Read the guidance',
   },
   {
     category: 'Candidate privacy',
     title: 'Screening should be necessary and proportionate.',
     metric: 'NEED-TO-KNOW',
     metricLabel: 'collect only relevant information',
-    description:
-      'The ICO treats conviction information as sensitive. Employers need a lawful basis and appropriate authority, should explain the checks to candidates, and should give people a chance to explain discrepancies.',
-    source: 'Information Commissioner’s Office, pre-employment vetting guidance',
-    date: '',
     href: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment/recruitment-and-selection/pre-employment-vetting-of-candidates/',
-    linkLabel: 'Read the guidance',
   },
 ]
 
 export function IntegrationsSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const cardRefs = useRef<(HTMLElement | null)[]>([])
-  const [trackOffset, setTrackOffset] = useState(0)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const totalCards = researchFindings.length
 
-  const touchStartX = useRef<number | null>(null)
-  const touchStartY = useRef<number | null>(null)
-
-  const updateTrackOffset = useCallback(() => {
-    const container = containerRef.current
-    const activeCard = cardRefs.current[activeIndex]
-    if (!container || !activeCard) return
-
-    const containerWidth = container.offsetWidth
-    const cardWidth = activeCard.offsetWidth
-    const cardLeft = activeCard.offsetLeft
-    // Center the active card within the container view
-    const targetOffset = (containerWidth - cardWidth) / 2 - cardLeft
-    setTrackOffset(targetOffset)
-  }, [activeIndex])
-
-  useEffect(() => {
-    updateTrackOffset()
-    window.addEventListener('resize', updateTrackOffset)
-    return () => window.removeEventListener('resize', updateTrackOffset)
-  }, [updateTrackOffset])
-
-  const goToSlide = (index: number) => {
-    if (index >= 0 && index < researchFindings.length) {
-      setActiveIndex(index)
-    }
-  }
-
-  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = e.touches[0].clientX
-    touchStartY.current = e.touches[0].clientY
-  }
-
-  const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current === null || touchStartY.current === null) return
-    const diffX = e.changedTouches[0].clientX - touchStartX.current
-    const diffY = e.changedTouches[0].clientY - touchStartY.current
-    touchStartX.current = null
-    touchStartY.current = null
-
-    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
-      if (diffX < 0 && activeIndex < researchFindings.length - 1) {
-        goToSlide(activeIndex + 1)
-      } else if (diffX > 0 && activeIndex > 0) {
-        goToSlide(activeIndex - 1)
-      }
-    }
-  }
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'ArrowLeft') {
+  const handleKeyDown = (e: KeyboardEvent<HTMLAnchorElement>, index: number) => {
+    if (e.key === 'ArrowRight') {
       e.preventDefault()
-      if (activeIndex > 0) goToSlide(activeIndex - 1)
-    } else if (e.key === 'ArrowRight') {
+      const next = (index + 1) % totalCards
+      const nextEl = document.getElementById(`fanned-card-${next}`)
+      nextEl?.focus()
+    } else if (e.key === 'ArrowLeft') {
       e.preventDefault()
-      if (activeIndex < researchFindings.length - 1) goToSlide(activeIndex + 1)
-    } else if (e.key === 'Home') {
-      e.preventDefault()
-      goToSlide(0)
-    } else if (e.key === 'End') {
-      e.preventDefault()
-      goToSlide(researchFindings.length - 1)
+      const prev = (index - 1 + totalCards) % totalCards
+      const prevEl = document.getElementById(`fanned-card-${prev}`)
+      prevEl?.focus()
     }
   }
 
@@ -138,118 +65,91 @@ export function IntegrationsSection() {
       </div>
 
       <div
-        className="research-slider"
-        ref={containerRef}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
+        className="fanned-deck-wrapper"
+        onMouseLeave={() => setHoveredIndex(null)}
         role="region"
-        aria-roledescription="carousel"
-        aria-label="Research findings carousel"
+        aria-label="Research findings fanned cards"
       >
-        <div
-          className="research-slider__track"
-          style={{ transform: `translate3d(${trackOffset}px, 0, 0)` }}
-        >
+        <div className="fanned-deck">
           {researchFindings.map((finding, index) => {
-            const isActive = index === activeIndex
-            return (
-              <article
-                className={`research-slide ${isActive ? 'is-active' : ''}`}
-                key={finding.category}
-                ref={(el) => {
-                  cardRefs.current[index] = el
-                }}
-                onClick={() => {
-                  if (!isActive) goToSlide(index)
-                }}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${index + 1} of ${researchFindings.length}: ${finding.title}`}
-                aria-current={isActive ? 'true' : undefined}
-              >
-                <div className="research-slide__body">
-                  <div className="research-slide__primary">
-                    <p className="research-slide__index">{`0${index + 1} / ${finding.category}`}</p>
-                    <h3 className="research-slide__title">{finding.title}</h3>
-                    <div
-                      className="research-slide__metric-box"
-                      aria-label={`${finding.metric}: ${finding.metricLabel}`}
-                    >
-                      <strong>{finding.metric}</strong>
-                      <span>{finding.metricLabel}</span>
-                    </div>
-                  </div>
+            const isHovered = hoveredIndex === index
+            const isThemeDark = index % 2 === 1
 
-                  <div className="research-slide__supporting">
-                    <p className="research-slide__description">{finding.description}</p>
-                    <div className="research-slide__footer">
-                      <p className="research-slide__source">
-                        {finding.source}
-                        {finding.date ? ` · ${finding.date}` : ''}
-                      </p>
-                      <a
-                        href={finding.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="research-slide__link"
-                        tabIndex={isActive ? 0 : -1}
-                      >
-                        {finding.linkLabel}
-                        <span aria-hidden="true">↗</span>
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
-                    </div>
-                  </div>
+            // Geometry calculations for resting fan layout:
+            // Centered normalized offset (-1.5, -0.5, 0.5, 1.5 for 4 cards)
+            const norm = index - (totalCards - 1) / 2
+            const restRotate = norm * 4.2
+            const restY = Math.abs(norm) * 6
+            const restZ = index + 1
+
+            // Dynamic transforms based on hover interaction matching reference video
+            let translateX = 0
+            let translateY = restY
+            let rotate = restRotate
+            let scale = 1
+            let zIndex = restZ
+
+            if (hoveredIndex !== null) {
+              if (isHovered) {
+                // Lifted, straightened, elevated foreground
+                translateX = 0
+                translateY = -42
+                rotate = 0
+                scale = 1.025
+                zIndex = 50
+              } else if (index < hoveredIndex) {
+                // Left neighbors shift slightly leftward
+                translateX = -14
+                translateY = restY
+                rotate = restRotate
+                zIndex = restZ
+              } else if (index > hoveredIndex) {
+                // Right neighbors shift slightly rightward
+                translateX = 14
+                translateY = restY
+                rotate = restRotate
+                zIndex = restZ
+              }
+            }
+
+            return (
+              <a
+                key={finding.category}
+                id={`fanned-card-${index}`}
+                href={finding.href}
+                target="_blank"
+                rel="noreferrer"
+                className={`fanned-card ${isThemeDark ? 'fanned-card--dark' : 'fanned-card--light'} ${
+                  isHovered ? 'is-lifted' : ''
+                }`}
+                style={{
+                  transform: `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`,
+                  zIndex,
+                }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onFocus={() => setHoveredIndex(index)}
+                onBlur={() => setHoveredIndex(null)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                aria-label={`${finding.category}: ${finding.title}. Metric: ${finding.metric} - ${finding.metricLabel} (opens in a new tab)`}
+              >
+                <div className="fanned-card__top">
+                  <span className="fanned-card__index">{`0${index + 1}`}</span>
+                  <span className="fanned-card__category">{finding.category}</span>
                 </div>
-              </article>
+
+                <h3 className="fanned-card__title">{finding.title}</h3>
+
+                <div
+                  className="fanned-card__metric-box"
+                  aria-label={`${finding.metric}: ${finding.metricLabel}`}
+                >
+                  <strong className="fanned-card__metric-val">{finding.metric}</strong>
+                  <span className="fanned-card__metric-label">{finding.metricLabel}</span>
+                </div>
+              </a>
             )
           })}
         </div>
-      </div>
-
-      <div className="research-slider__controls" aria-label="Research slide controls">
-        <button
-          type="button"
-          className="research-slider__btn"
-          onClick={() => goToSlide(activeIndex - 1)}
-          disabled={activeIndex === 0}
-          aria-label="Previous research slide"
-        >
-          <span aria-hidden="true">←</span>
-          <span>Previous</span>
-        </button>
-
-        <div className="research-slider__center">
-          <div className="research-slider__dots" role="tablist" aria-label="Research slides pagination">
-            {researchFindings.map((finding, idx) => (
-              <button
-                key={finding.category}
-                type="button"
-                role="tab"
-                aria-selected={idx === activeIndex}
-                aria-label={`Go to slide ${idx + 1}: ${finding.category}`}
-                className={`research-slider__dot ${idx === activeIndex ? 'is-active' : ''}`}
-                onClick={() => goToSlide(idx)}
-              />
-            ))}
-          </div>
-          <span className="research-slider__counter" aria-live="polite">
-            {String(activeIndex + 1).padStart(2, '0')} / {String(researchFindings.length).padStart(2, '0')}
-          </span>
-        </div>
-
-        <button
-          type="button"
-          className="research-slider__btn"
-          onClick={() => goToSlide(activeIndex + 1)}
-          disabled={activeIndex === researchFindings.length - 1}
-          aria-label="Next research slide"
-        >
-          <span>Next</span>
-          <span aria-hidden="true">→</span>
-        </button>
       </div>
     </section>
   )
