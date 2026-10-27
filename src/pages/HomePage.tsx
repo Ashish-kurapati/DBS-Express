@@ -79,11 +79,14 @@ function CheckTypesSection() {
             key={checkType}
           >
             <div className="check-type-card__media">
-              <span className="check-type-card__index" aria-hidden="true">{`0${index + 1}`}</span>
-              <svg className="check-type-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                <path d="M14 7.75h14l8 8v24.5H14a3 3 0 0 1-3-3v-26.5a3 3 0 0 1 3-3Z" />
-                <path d="M28 8v9h8M18 25h14M18 31h10" />
-              </svg>
+              {checkDetails[index].image && (
+                <img
+                  src={checkDetails[index].image}
+                  alt={checkType}
+                  className="check-type-card__img"
+                  loading="lazy"
+                />
+              )}
               <span className="check-type-card__badge">{checkDetails[index].badge}</span>
             </div>
             <div className="check-type-card__body">
