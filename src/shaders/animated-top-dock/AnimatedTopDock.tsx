@@ -99,9 +99,11 @@ const VARIANT_ITEMS: Record<AnimatedTopDockVariant, readonly DockItem[]> = {
 };
 
 const BRAND_MARK = (
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    <path d="m9 12 2 2 4-4" />
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect width="24" height="24" rx="4.5" fill="#E8E8E3" />
+    <path d="M6 6h8.6L18 9.35v8.15H9.15L6 14.35V6Z" fill="#111" />
+    <path d="M9 9h5.15L15 9.85V15H9.85L9 14.15V9Z" fill="#E8E8E3" />
+    <path d="M12 9v6M9 12h6" stroke="#111" strokeWidth=".7" />
   </svg>
 );
 
@@ -338,7 +340,7 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
             }}
           >
             <span className="atd-modern__mark" aria-hidden="true">{BRAND_MARK}</span>
-            <span className="atd-modern__word">DBS-Express</span>
+            <span className="atd-modern__word">Lumina</span>
           </a>
           <nav ref={rootRef} className="atd-modern__dock" aria-label="Primary" data-dock-state="idle" data-dock-max="0.00">
             {dockItems("atd-modern__item", "atd-modern__icon", "0 0 16 16")}
@@ -371,7 +373,7 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
                 }
               }}
             >
-              <span>Make an enquiry</span>
+              <span>Start building</span>
               <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8h9.1M8.6 4.3 12.4 8l-3.8 3.7" /></svg>
             </a>
           </div>
