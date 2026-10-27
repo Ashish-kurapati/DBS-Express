@@ -1,46 +1,63 @@
 :root {
-  /* ─── Light Grey Canvas & Pure White Card (Matching Reference Card) ─── */
-  --color-canvas: #F3F4F6;
-  --color-card-bg: #FFFFFF;
-  --color-card-border: #E5E7EB;
-  --color-card-border-hover: #D1D5DB;
-  --color-pill-bg: #F3F4F6;
-  --color-pill-text: #4B5563;
+  /* ═══════════════════════════════════════════════════════════════════════════
+     DBS-EXPRESS DESIGN SYSTEM COLOR TOKENS
+     ═══════════════════════════════════════════════════════════════════════════ */
 
-  /* Surfaces */
+  /* ─── White Family ─── */
+  /* White 1 – Pure white: Surface (Cards, forms, pricing boxes, input fields, FAQ cards, dropdown menus) */
   --pure-white: #FFFFFF;
-  --soft-white: #F3F4F6;
-  --color-background: #F3F4F6;
   --color-surface: #FFFFFF;
-  --color-surface-muted: #F9FAFB;
-  --mint-white: #FFFFFF;
+  --color-card-bg: #FFFFFF;
   --warm-ivory: #FFFFFF;
-  --soft-ivory: #F3F4F6;
-  --color-soft-white: #F3F4F6;
 
-  /* ─── Restored Text Colors (Crisp, High-Contrast Modern Neutrals) ─── */
-  --deep-charcoal: #111827;
-  --mid-charcoal: #4B5563;
-  --light-charcoal: #6B7280;
-  --color-text-primary: #111827;
-  --color-text-secondary: #4B5563;
-  --color-text-muted: #6B7280;
+  /* White 2 – Soft white: Page background (Main page background, hero section, standard content sections) */
+  --soft-white: #F7F8F7;
+  --color-soft-white: #F7F8F7;
+  --color-background: #F7F8F7;
+  --color-canvas: #F7F8F7;
 
-  /* ─── Brand Accents & Interactive Tones ─── */
-  --color-brand-accent: #15803D;
-  --brand-emerald: #15803D;
-  --dark-emerald: #166534;
-  --pale-emerald: #DCFCE7;
-  --color-accent: #15803D;
+  /* White 3 – Mint white: Alternate background (Alternating sections: How it works, testimonials, trust badges; table row stripes) */
+  --mint-white: #EEF7F3;
+  --color-surface-muted: #EEF7F3;
+  --soft-ivory: #EEF7F3;
 
-  --color-action: #111827;
-  --color-action-hover: #1F2937;
-  --color-action-text: #FFFFFF;
-  --color-focus: #111827;
+  /* ─── Emerald Family ─── */
+  /* Emerald 1 – Dark emerald: Pressed / emphasis (Button hover & pressed states, link hover, text on mint backgrounds) */
+  --dark-emerald: #035A41;
+  --color-action-hover: #035A41;
 
-  /* ─── Borders & Dividers ─── */
+  /* Emerald 2 – Brand emerald: Primary action (Main buttons: Apply now, Get started; links, icons, active nav item, step numbers) */
+  --brand-emerald: #037554;
+  --color-brand-accent: #037554;
+  --color-accent: #037554;
+  --color-action: #037554;
+  --color-focus: #037554;
+
+  /* Emerald 3 – Pale emerald: Highlight (Badges: e.g. "Most popular", icon circles, form focus rings, success messages) */
+  --pale-emerald: #CCEBE0;
+  --color-pill-bg: #CCEBE0;
+  --color-pill-text: #035A41;
+
+  /* ─── Charcoal Family ─── */
+  /* Charcoal 1 – Deep charcoal: Structure (Headings, header bar, footer background, secondary outline buttons) */
+  --deep-charcoal: #1D232A;
+  --color-text-primary: #1D232A;
+
+  /* Charcoal 2 – Mid charcoal: Body text (Paragraphs, form labels, card descriptions, footer link text on light pages) */
+  --mid-charcoal: #3F4552;
+  --color-text-secondary: #3F4552;
+
+  /* Charcoal 3 – Light charcoal: Muted text (Captions, helper text under form fields, timestamps, small print, placeholders) */
+  --light-charcoal: #5F6672;
+  --color-text-muted: #5F6672;
+
+  /* ─── Utility Family ─── */
+  /* Border grey: Lines only (Card borders, dividers, table lines, input borders — never as a fill) */
   --border-grey: #E5E7EB;
   --color-border: #E5E7EB;
+  --color-card-border: #E5E7EB;
+  --color-card-border-hover: #D1D5DB;
+  --color-action-text: #FFFFFF;
 
   /* ─── Typography: 100% Inter (All Headings, Body, & Elements) ─── */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -57,15 +74,15 @@
   --leading-body: 1.6;
   --leading-tight: 1.15;
 
-  /* ─── Card Geometry & Shadows (From Reference) ─── */
+  /* ─── Card Geometry & Shadows ─── */
   --radius-small: 8px;
   --radius-medium: 14px;
   --radius-large: 18px;
   --radius-pill: 9999px;
 
-  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
   --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
 
   /* Spacing Scale */
   --space-1: 8px;
