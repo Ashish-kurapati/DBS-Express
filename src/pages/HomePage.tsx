@@ -200,10 +200,10 @@ export function HomePage() {
         rawHash === 'dbs-checks'
           ? 'services'
           : rawHash === 'how-it-works'
-          ? 'workflow'
-          : rawHash === 'faqs'
-          ? 'faq'
-          : rawHash
+            ? 'workflow'
+            : rawHash === 'faqs'
+              ? 'faq'
+              : rawHash
 
       const el = document.getElementById(targetId) || document.getElementById(rawHash)
       if (el) {
