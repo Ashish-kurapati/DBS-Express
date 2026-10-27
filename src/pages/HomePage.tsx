@@ -12,6 +12,7 @@ const checkTypes = ['Basic DBS check', 'Standard DBS check', 'Enhanced DBS check
 
 const checkDetails = [
   {
+    image: '/assets/team-collaboration.jpg',
     badge: 'For any purpose',
     description:
       'For any purpose, including employment. Shows unspent convictions and conditional cautions.',
@@ -19,6 +20,7 @@ const checkDetails = [
     linkLabel: 'Basic check details',
   },
   {
+    image: '/assets/compliance-documents.jpg',
     badge: 'Eligible roles only',
     description:
       'For certain roles. Shows relevant spent and unspent convictions and cautions that are not filtered.',
@@ -26,6 +28,7 @@ const checkDetails = [
     linkLabel: 'Standard check details',
   },
   {
+    image: '/assets/fast-turnaround.jpg',
     badge: 'Eligible roles only',
     description:
       'For roles eligible for an Enhanced check. It may also include relevant information held by local police.',
