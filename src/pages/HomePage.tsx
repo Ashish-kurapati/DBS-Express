@@ -1,14 +1,18 @@
 import { useEffect } from 'react'
-import { signUpUrl } from '../data/siteContent'
+import { pricingTiers, signUpUrl } from '../data/siteContent'
 import { HeroDashboard } from '../components/HeroDashboard'
 import { IntegrationsSection } from '../components/IntegrationsSection'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { TestimonialsSection } from '../components/TestimonialsSection'
 import { WorkflowSection } from '../components/WorkflowSection'
+import { IndividualJourneySections } from '../components/IndividualJourneySections'
+import { CheckGuidanceTool } from '../components/CheckGuidanceTool'
 import { useScrollRevealContainer } from '../hooks/useScrollReveal'
+import { SectionIcon } from '../components/SectionIcon'
+import { FloatingStartButton } from '../components/FloatingStartButton'
 
 const checkTypes = ['Basic DBS check', 'Standard DBS check', 'Enhanced DBS check']
+const startingPrices = pricingTiers[pricingTiers.length - 1]
 
 const checkDetails = [
   {
@@ -43,18 +47,17 @@ function Hero() {
       <div className="hero-copy reveal-on-scroll">
         <p className="eyebrow"><span /> DBS CHECK GUIDANCE</p>
         <h1 id="hero-title">
-          Make your next DBS check <span className="text-accent">clearer.</span>
+          DBS checks, <span className="text-accent">made clear.</span>
         </h1>
         <p className="hero-description">
-          A straightforward place to understand Basic, Standard, and Enhanced DBS checks — and
-          find the right next step for you.
+          Compare check levels, understand eligibility, and choose your next step.
         </p>
         <div className="hero-actions">
-          <a className="button button-primary" href="#services">
-            Explore DBS checks <span aria-hidden="true">↓</span>
+          <a className="button button-primary" href="/apply/individual">
+            Apply for my own check <span aria-hidden="true">↗</span>
           </a>
           <a className="button button-secondary" href={signUpUrl} target="_blank" rel="noreferrer">
-            Make an application <span aria-hidden="true">↗</span>
+            Register my organisation <span aria-hidden="true">↗</span>
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
@@ -70,8 +73,9 @@ function CheckTypesSection() {
     <section className="check-types-section section-pad" id="services" aria-labelledby="check-types-title">
       <div className="check-types-heading reveal-on-scroll">
         <p className="eyebrow"><span /> DBS CHECKS</p>
-        <h2 id="check-types-title">Different roles. <span className="text-accent">Different checks.</span></h2>
-        <p>Start with the role. The right check depends on what the position is legally eligible for.</p>
+        <SectionIcon label="DBS check levels illustration" />
+        <h2 id="check-types-title">Choose by role.</h2>
+        <p>Check eligibility before choosing a DBS level.</p>
       </div>
       <div className="check-types-grid check-types-grid--deck reveal-on-scroll">
         {checkTypes.map((checkType, index) => (
@@ -112,9 +116,15 @@ function PricingSection() {
     <section className="pricing-overview section-pad reveal-on-scroll" id="pricing" aria-labelledby="pricing-title">
       <div className="pricing-overview__copy">
         <p className="eyebrow"><span /> PRICING</p>
-        <h2 id="pricing-title">See the latest pricing for your check.</h2>
-        <p>
-          Check the current fees and volume options directly with DB-Express before you apply.
+        <SectionIcon label="Pricing illustration" />
+        <h2 id="pricing-title">See your check price.</h2>
+        <p>All-in totals include government, administration, and Digital ID fees.</p>
+        <p className="pricing-overview__price">
+          Basic <strong>{startingPrices.basicStandard}</strong> · Enhanced{' '}
+          <strong>{startingPrices.enhanced}</strong>
+        </p>
+        <p className="pricing-overview__price-note">
+          From prices apply to 500–1,499 checks yearly. Digital ID included.
         </p>
       </div>
       <a className="button button-primary" href="/pricing">
@@ -129,12 +139,13 @@ function FaqSection() {
     <section className="faq-section section-pad reveal-on-scroll" id="faq" aria-labelledby="faq-title">
       <div className="faq-section__intro">
         <p className="eyebrow"><span /> HERE TO HELP</p>
-        <h2 id="faq-title">Questions, <span className="text-accent">made simpler.</span></h2>
-        <p>Quick answers to help you understand the different levels of DBS check.</p>
+        <SectionIcon label="DBS help illustration" />
+        <h2 id="faq-title">DBS questions, answered.</h2>
+        <p>Short answers about check levels, applications, and eligibility.</p>
       </div>
       <div className="faq-list">
-        <details className="faq-item">
-          <summary>What is the difference between Basic, Standard, and Enhanced checks?</summary>
+        <details className="faq-item" name="page-details">
+          <summary>How do DBS check levels differ?</summary>
           <p>
             Each level can show different information, and Standard and Enhanced checks are only
             available for roles that meet legal eligibility requirements.{' '}
@@ -143,30 +154,30 @@ function FaqSection() {
             </a>
           </p>
         </details>
-        <details className="faq-item">
-          <summary>Can I apply for a Basic DBS check myself?</summary>
+        <details className="faq-item" name="page-details">
+          <summary>Can I apply for Basic?</summary>
           <p>
             Yes. A person can apply for a Basic check directly; an employer can also apply with the
             applicant’s consent.{' '}
-            <a href="https://www.gov.uk/request-copy-criminal-record" target="_blank" rel="noreferrer">
+            <a href="/apply/individual">
               Apply for a Basic check <span aria-hidden="true">↗</span>
             </a>
           </p>
         </details>
-        <details className="faq-item">
-          <summary>Can anyone request a Standard or Enhanced check?</summary>
+        <details className="faq-item" name="page-details">
+          <summary>Who can request higher-level checks?</summary>
           <p>
             No. These checks are limited to roles that meet the legal eligibility criteria. The
             recruiting organisation should confirm the correct level for the role.
           </p>
         </details>
-        <details className="faq-item">
-          <summary>Where can I get help with my application?</summary>
+        <details className="faq-item" name="page-details">
+          <summary>Where can I get application help?</summary>
           <p>
-            Contact the DB-Express team for support with choosing a check or completing an
+            Contact the DBS-Express team for support with choosing a check or completing an
             application.{' '}
             <a href="/contact">
-              Contact DB-Express <span aria-hidden="true">↗</span>
+              Contact DBS-Express <span aria-hidden="true">↗</span>
             </a>
           </p>
         </details>
@@ -180,14 +191,15 @@ function NextStepsSection() {
     <section className="next-steps-section section-pad reveal-on-scroll" id="contact" aria-labelledby="next-steps-title">
       <div>
         <p className="eyebrow"><span /> NEED A HAND?</p>
-        <h2 id="next-steps-title">Not sure which check you need?</h2>
-        <p className="next-steps-copy">The DB-Express team can help you find the right place to start.</p>
+        <SectionIcon label="Application support illustration" />
+        <h2 id="next-steps-title">Need help choosing?</h2>
+        <p className="next-steps-copy">Get guidance or start an application.</p>
       </div>
       <div className="next-steps-actions">
         <a className="button button-primary" href="/contact">
           Make an enquiry <span aria-hidden="true">↗</span>
         </a>
-        <a className="button button-secondary" href={signUpUrl} target="_blank" rel="noreferrer">
+        <a className="button button-secondary" href="/apply">
           Start an application <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -232,13 +244,15 @@ export function HomePage() {
         <Hero />
         <CheckTypesSection />
         <WorkflowSection />
+        <IndividualJourneySections />
+        <CheckGuidanceTool />
         <IntegrationsSection />
-        <TestimonialsSection />
         <PricingSection />
         <FaqSection />
         <NextStepsSection />
       </main>
       <SiteFooter />
+      <FloatingStartButton />
     </div>
   )
 }

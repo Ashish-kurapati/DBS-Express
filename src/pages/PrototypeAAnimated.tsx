@@ -1,12 +1,10 @@
-import { loginUrl, signUpUrl, sourceSite } from '../data/siteContent'
+import { loginUrl, pricingTiers, signUpUrl, sourceSite } from '../data/siteContent'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { CardStack } from '../components/CardStack'
 import { useReveal } from '../hooks/useScrollReveal'
-import { StatisticsSection } from '../components/StatisticsSection'
 import { WorkflowSection } from '../components/WorkflowSection'
 import { IntegrationsSection } from '../components/IntegrationsSection'
-import { TestimonialsSection } from '../components/TestimonialsSection'
 import { CookieConsent } from '../components/CookieConsent'
 
 const checkTypes = ['Basic DBS check', 'Standard DBS check', 'Enhanced DBS check']
@@ -23,14 +21,14 @@ const checkDetails = [
   {
     image: '/assets/compliance-documents.jpg',
     badge: 'Regulated Roles',
-    description: 'Review Standard DBS information on the DB-Express employer page.',
+    description: 'Review Standard DBS information on the DBS-Express employer page.',
     href: `${sourceSite}/employers`,
     linkLabel: 'Employer check information',
   },
   {
     image: '/assets/fast-turnaround.jpg',
     badge: 'Comprehensive',
-    description: 'Review Enhanced DBS information on the DB-Express employer page.',
+    description: 'Review Enhanced DBS information on the DBS-Express employer page.',
     href: `${sourceSite}/employers`,
     linkLabel: 'Employer check information',
   },
@@ -66,9 +64,8 @@ function AnimatedHero() {
           Reduce time-to-hire with automated Basic, Standard, and Enhanced DBS check processing. Apply online in under 10 minutes.
         </p>
         <div className="hero-actions">
-          <a className="button button-primary" href={signUpUrl} target="_blank" rel="noreferrer">
+          <a className="button button-primary" href="/apply">
             Get started <span aria-hidden="true">↗</span>
-            <span className="sr-only"> (opens in a new tab)</span>
           </a>
           <a className="button button-secondary" href="#services">
             View check types <span aria-hidden="true">↓</span>
@@ -97,7 +94,7 @@ function AnimatedCheckTypes() {
           <span /> DBS CHECKS
         </p>
         <h2 id="anim-check-types-title">Compare the available check types.</h2>
-        <p>Read the DB-Express information for each check before continuing.</p>
+        <p>Read the DBS-Express information for each check before continuing.</p>
       </div>
       <div className="check-types-grid">
         {checkTypes.map((checkType, index) => (
@@ -152,7 +149,7 @@ function AnimatedPricing() {
           <h3 className="pricing-tier-card__title">Pay As You Go</h3>
           <p className="pricing-tier-card__volume">1 to 99 checks / year</p>
           <div className="pricing-tier-card__price">
-            <span className="pricing-tier-card__amount">£37.70</span>
+            <span className="pricing-tier-card__amount">{pricingTiers[0].basicStandard}</span>
             <span className="pricing-tier-card__unit">per check</span>
           </div>
           <p className="pricing-tier-card__desc">Ideal for small teams and occasional hires needing fast results.</p>
@@ -171,13 +168,13 @@ function AnimatedPricing() {
           <h3 className="pricing-tier-card__title">Volume Tier</h3>
           <p className="pricing-tier-card__volume">100 to 499 checks / year</p>
           <div className="pricing-tier-card__price">
-            <span className="pricing-tier-card__amount">£35.30</span>
+            <span className="pricing-tier-card__amount">{pricingTiers[1].basicStandard}</span>
             <span className="pricing-tier-card__unit">per check</span>
           </div>
           <p className="pricing-tier-card__desc">Best value for growing companies with regular onboarding cycles.</p>
           <ul className="pricing-tier-card__features">
             <li>Everything in Pay As You Go</li>
-            <li>Enhanced DBS checks available (£63.30)</li>
+            <li>Enhanced DBS checks available ({pricingTiers[1].enhanced})</li>
             <li>Free Right to Work verification</li>
             <li>Automated candidate reminders</li>
           </ul>
@@ -188,9 +185,9 @@ function AnimatedPricing() {
 
         <article className="pricing-tier-card">
           <h3 className="pricing-tier-card__title">Enterprise</h3>
-          <p className="pricing-tier-card__volume">500+ checks / year</p>
+          <p className="pricing-tier-card__volume">{pricingTiers[2].volume}</p>
           <div className="pricing-tier-card__price">
-            <span className="pricing-tier-card__amount">£34.10</span>
+            <span className="pricing-tier-card__amount">{pricingTiers[2].basicStandard}</span>
             <span className="pricing-tier-card__unit">per check</span>
           </div>
           <p className="pricing-tier-card__desc">Tailored high-volume compliance for enterprise organisations.</p>
@@ -224,9 +221,8 @@ function AnimatedNextSteps() {
         <h2 id="anim-next-steps-title">Continue to the service when you're ready.</h2>
       </div>
       <div className="next-steps-actions">
-        <a className="button button-primary" href={signUpUrl} target="_blank" rel="noreferrer">
+        <a className="button button-primary" href="/apply">
           Open application service <span aria-hidden="true">↗</span>
-          <span className="sr-only"> (opens in a new tab)</span>
         </a>
         <a className="button button-secondary" href={loginUrl} target="_blank" rel="noreferrer">
           Portal login <span aria-hidden="true">↗</span>
@@ -256,8 +252,6 @@ export function PrototypeAAnimated() {
         <AnimatedCheckTypes />
         <WorkflowSection />
         <IntegrationsSection />
-        <StatisticsSection />
-        <TestimonialsSection />
         <AnimatedPricing />
         <AnimatedNextSteps />
       </main>
@@ -267,7 +261,7 @@ export function PrototypeAAnimated() {
         <span aria-hidden="true">i</span>
         <p>
           This is an experimental animation variant of Prototype A. Applications and account
-          access are handled by the DB-Express service.
+          access are handled by the DBS-Express service.
         </p>
       </div>
     </div>

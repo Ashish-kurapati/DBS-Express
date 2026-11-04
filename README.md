@@ -17,7 +17,7 @@ Vite prints the local development URL (normally `http://localhost:5173`).
 
 ## Routes
 
-The site is a single-page website served at `/`. Vercel rewrites requests to the app entry point so direct navigation works. The former prototype URLs do not select separate designs.
+The site is a single-page website served at `/`. Vercel rewrites requests to the app entry point so direct navigation works. `/apply` presents separate individual and employer routes; `/apply/individual` links to the existing external personal application service and direct GOV.UK Basic application. Employer registration continues to use the existing organisation sign-up service. The former prototype URLs do not select separate designs.
 
 The header uses the ThreeUI AnimatedTopDock modern command bar, with its proximity animation connected to the DBS checks, workflow, pricing, FAQ, contact, login, and enquiry actions. Its motion respects reduced-motion settings and is disabled on narrow or non-fine-pointer viewports by the source controller. The hero uses a static illustration of the three DBS check types. Other sections and check cards reveal gently as they enter view, and the FAQ uses native keyboard-accessible disclosure controls.
 

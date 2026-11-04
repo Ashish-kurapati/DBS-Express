@@ -1,16 +1,17 @@
 import { useState, type KeyboardEvent } from 'react'
+import { SectionIcon } from './SectionIcon'
 
 const researchFindings = [
   {
     category: 'Recruitment practice',
-    title: 'More applications do not guarantee better shortlists.',
+    title: 'Shortlists need more than volume.',
     metric: '58% / 33%',
     metricLabel: 'unsuitable / suitable application increases',
     href: 'https://www.cipd.org/uk/knowledge/reports/resourcing-surveys/',
   },
   {
     category: 'DBS eligibility',
-    title: 'The role determines the right DBS level.',
+    title: 'Role determines DBS eligibility.',
     metric: 'ROLE-LED',
     metricLabel: 'eligibility follows the work involved',
     href: 'https://www.gov.uk/government/collections/dbs-eligibility-guidance',
@@ -55,12 +56,13 @@ export function IntegrationsSection() {
       aria-labelledby="integrations-title"
     >
       <div className="research-section__intro">
+        <SectionIcon label="Hiring research illustration" />
         <p className="research-section__label">RESEARCH &amp; INSIGHTS</p>
         <h2 id="integrations-title" className="research-section__title">
-          The facts behind better hiring decisions.
+          Facts for better hiring.
         </h2>
         <p className="research-section__summary">
-          Understand the evidence behind background screening, identity verification, and informed hiring decisions.
+          Evidence on screening, identity, and fair hiring.
         </p>
       </div>
 

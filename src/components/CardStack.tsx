@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { signUpUrl, sourceSite } from '../data/siteContent'
+import { sourceSite } from '../data/siteContent'
 
 const cards = [
   {
@@ -116,9 +116,8 @@ export function CardStack() {
       ))}
 
       <div className="card-stack__cta">
-        <a className="button button-primary" href={signUpUrl} target="_blank" rel="noreferrer">
+        <a className="button button-primary" href="/apply">
           Get started <span aria-hidden="true">↗</span>
-          <span className="sr-only"> (opens in a new tab)</span>
         </a>
         <a className="button button-secondary" href="#pricing">
           View pricing <span aria-hidden="true">↓</span>

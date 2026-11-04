@@ -1,3 +1,5 @@
+import { SectionIcon } from './SectionIcon'
+
 const steps = [
   {
     step: '1',
@@ -23,11 +25,12 @@ export function WorkflowSection() {
   return (
     <section className="workflow-cards-section section-pad reveal-on-scroll" id="workflow" aria-labelledby="workflow-title">
       <div className="workflow-cards-section__header">
+        <SectionIcon label="Three-step workflow illustration" />
         <h2 id="workflow-title" className="workflow-cards-section__title">
-          Three simple steps to your result.
+          Three steps to results.
         </h2>
         <p className="workflow-cards-section__subtitle">
-          Whether ordering a single check or bulk submissions, the same clear workflow applies.
+          One clear process for single or bulk checks.
         </p>
       </div>
 

@@ -55,6 +55,8 @@ type DockItem = {
   icon: ReactNode;
   href?: string;
   sectionId?: string;
+  target?: string;
+  external?: boolean;
 };
 
 const ITEMS: readonly DockItem[] = [
@@ -66,11 +68,13 @@ const ITEMS: readonly DockItem[] = [
 ];
 
 const MODERN_ITEMS: readonly DockItem[] = [
-  { id: "services", label: "DBS checks", href: "/#services", sectionId: "services", icon: <><path d="M8 1.9 14.1 5v6L8 14.1 1.9 11V5z" /><path d="M1.9 5 8 8.1 14.1 5M8 8.1v6" /></> },
-  { id: "workflow", label: "How it works", href: "/#workflow", sectionId: "workflow", icon: <><path d="M8 1.9 14.4 5.6 8 9.3 1.6 5.6z" /><path d="m2.6 8 5.4 3.1L13.4 8M2.6 10.7 8 13.8l5.4-3.1" /></> },
+  { id: "individuals", label: "Individuals", href: "/individuals", icon: <><circle cx="8" cy="5" r="2.4" /><path d="M3.2 13.7c.5-2.6 2.1-4 4.8-4s4.3 1.4 4.8 4" /></> },
+  { id: "employers", label: "Employers", href: "/employers", icon: <><circle cx="5.2" cy="5" r="2" /><circle cx="10.8" cy="5" r="2" /><path d="M1.8 13.5c.3-2.2 1.4-3.4 3.4-3.4s3.1 1.2 3.4 3.4M7.4 10.5c.7-.7 1.7-1 3-1 2.1 0 3.4 1.3 3.8 4" /></> },
+  { id: "self-employed", label: "Self-employed", href: "/self-employed", icon: <><rect x="2" y="3" width="12" height="10" rx="1.5" /><path d="M5 6h6M5 8.5h6M5 11h3" /></> },
+  { id: "track", label: "Track my DBS", href: "https://www.gov.uk/guidance/dbs-check-requests-guidance-for-employers#how-to-track-a-dbs-application", external: true, target: "_blank", icon: <><circle cx="7" cy="7" r="4.5" /><path d="m10.5 10.5 3 3M5 7h4M7 5v4" /></> },
   { id: "pricing", label: "Pricing", href: "/pricing", sectionId: "pricing", icon: <><path d="M8.6 2.2H13v4.4l-6.6 6.6a1.2 1.2 0 0 1-1.7 0L2.2 10.5a1.2 1.2 0 0 1 0-1.7z" /><circle cx="10.6" cy="4.6" r=".9" /></> },
-  { id: "faq", label: "FAQs", href: "/faq", sectionId: "faq", icon: <><path d="M3.4 2.4h5.4l3.8 3.8v7.4H3.4z" /><path d="M8.8 2.4v3.8h3.8M5.9 9h4.2M5.9 11.2h3" /></> },
-  { id: "contact", label: "Contact", href: "/contact", sectionId: "contact", icon: <><circle cx="8" cy="8" r="5.9" /><path d="M8 4.6V8l2.4 1.5" /></> },
+  { id: "guidance", label: "Check guidance", href: "/#check-guidance", sectionId: "check-guidance", icon: <><circle cx="8" cy="8" r="6" /><path d="M6.3 6a1.8 1.8 0 1 1 3.3 1c-.7.8-1.6 1-1.6 2.3M8 11.7v.1" /></> },
+  { id: "how-we-work", label: "How we work", href: "/team", icon: <><path d="M3 2.5h8l2 2v9H3z" /><path d="M5.5 7h5M5.5 9.5h5M5.5 12h3" /></> },
 ];
 
 /* every retro glyph is drawn on a 7x7 lattice of whole units so the icons stay
@@ -200,12 +204,27 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
     if (path === "/pricing" || hash === "#pricing") return "pricing";
     if (path === "/faq" || hash === "#faq" || hash === "#faqs") return "faq";
     if (path === "/contact" || hash === "#contact") return "contact";
-    if (path === "/employers" || hash === "#services" || hash === "#dbs-checks") return "services";
-    if (hash === "#workflow" || hash === "#how-it-works") return "workflow";
+    if (path === "/individuals") return "individuals";
+    if (path === "/employers") return "employers";
+    if (path === "/self-employed") return "self-employed";
+    if (path === "/team") return "how-we-work";
+    if (path === "/" && hash === "#check-guidance") return "guidance";
+    if (hash === "#services" || hash === "#dbs-checks") return "individuals";
+    if (hash === "#workflow" || hash === "#how-it-works") return "how-we-work";
     return items[0]?.id ?? "services";
   };
 
   const [active, setActive] = useState(getActiveId);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -273,17 +292,14 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
 
     // Case 2: Hash link meant for the home page (e.g. "/#services", "/#workflow")
     if (item.href?.startsWith("/#")) {
-      e.preventDefault();
       if (isHomePage) {
+        e.preventDefault();
         const hash = item.href.replace("/#", "");
         const el = document.getElementById(hash) || document.querySelector(`#${hash}`);
         if (el) {
           el.scrollIntoView({ behavior: "smooth" });
           window.history.pushState(null, "", `#${hash}`);
         }
-      } else {
-        window.history.pushState(null, "", item.href);
-        window.dispatchEvent(new PopStateEvent("popstate"));
       }
       return;
     }
@@ -309,16 +325,18 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
         href={item.href ?? "#"}
         className={itemClass}
         data-dock-item
-        role="button"
-        tabIndex={0}
-        aria-label={item.label}
-        aria-pressed={active === item.id}
-        onClick={(e) => navigateTo(e, item)}
+        target={item.target}
+        rel={item.target === "_blank" ? "noreferrer" : undefined}
+        aria-current={active === item.id ? "page" : undefined}
+        onClick={(e) => {
+          setMobileMenuOpen(false);
+          navigateTo(e, item);
+        }}
       >
         <span className={iconClass} aria-hidden="true">
           <svg viewBox={viewBox}>{item.icon}</svg>
         </span>
-        <span>{item.label}</span>
+        <span>{item.label}{item.external && <> <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></>}</span>
       </a>
     ));
 
@@ -340,11 +358,21 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
             }}
           >
             <span className="atd-modern__mark" aria-hidden="true">{BRAND_MARK}</span>
-            <span className="atd-modern__word">Lumina</span>
+            <span className="atd-modern__word">DBS-Express</span>
           </a>
           <nav ref={rootRef} className="atd-modern__dock" aria-label="Primary" data-dock-state="idle" data-dock-max="0.00">
             {dockItems("atd-modern__item", "atd-modern__icon", "0 0 16 16")}
           </nav>
+          <button
+            className="atd-modern__menu-toggle"
+            type="button"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-primary-navigation"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <span className="atd-modern__menu-icon" aria-hidden="true"><span /><span /><span /></span>
+            {mobileMenuOpen ? "Close menu" : "Menu"}
+          </button>
           <div className="atd-modern__actions">
             <a
               className="atd-modern__ghost"
@@ -378,6 +406,23 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
             </a>
           </div>
         </header>
+        <nav id="mobile-primary-navigation" className="atd-modern__mobile-menu" aria-label="Mobile primary" hidden={!mobileMenuOpen}>
+          {items.map((item) => (
+            <a
+              key={item.id}
+              href={item.href ?? "#"}
+              target={item.target}
+              rel={item.target === "_blank" ? "noreferrer" : undefined}
+              aria-current={active === item.id ? "page" : undefined}
+              onClick={(event) => {
+                setMobileMenuOpen(false);
+                navigateTo(event, item);
+              }}
+            >
+              <span className="atd-modern__mobile-label">{item.label}</span>{item.external && <> <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></>}
+            </a>
+          ))}
+        </nav>
         <div className="atd-modern__stage" aria-hidden="true">
           <p className="atd-modern__eyebrow">Interface systems</p>
           <p className="atd-modern__headline">Everything above the fold</p>
