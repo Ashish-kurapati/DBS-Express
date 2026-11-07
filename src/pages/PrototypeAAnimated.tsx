@@ -216,7 +216,7 @@ function AnimatedNextSteps() {
     >
       <div className="reveal-block" ref={ref}>
         <p className="eyebrow">
-          <span /> DB-EXPRESS
+          <span /> DBS-EXPRESS
         </p>
         <h2 id="anim-next-steps-title">Continue to the service when you're ready.</h2>
       </div>

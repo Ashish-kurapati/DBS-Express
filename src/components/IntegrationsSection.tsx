@@ -1,36 +1,5 @@
 import { useState, type KeyboardEvent } from 'react'
-import { SectionIcon } from './SectionIcon'
-
-const researchFindings = [
-  {
-    category: 'Recruitment practice',
-    title: 'Shortlists need more than volume.',
-    metric: '58% / 33%',
-    metricLabel: 'unsuitable / suitable application increases',
-    href: 'https://www.cipd.org/uk/knowledge/reports/resourcing-surveys/',
-  },
-  {
-    category: 'DBS eligibility',
-    title: 'Role determines DBS eligibility.',
-    metric: 'ROLE-LED',
-    metricLabel: 'eligibility follows the work involved',
-    href: 'https://www.gov.uk/government/collections/dbs-eligibility-guidance',
-  },
-  {
-    category: 'Right to work',
-    title: 'Right-to-work checks come before employment.',
-    metric: 'BEFORE HIRE',
-    metricLabel: 'a prescribed employer check',
-    href: 'https://www.gov.uk/government/publications/right-to-work-checks-employers-guide',
-  },
-  {
-    category: 'Candidate privacy',
-    title: 'Screening should be necessary and proportionate.',
-    metric: 'NEED-TO-KNOW',
-    metricLabel: 'collect only relevant information',
-    href: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/employment/recruitment-and-selection/pre-employment-vetting-of-candidates/',
-  },
-]
+import { researchFindings } from '../data/siteContent'
 
 export function IntegrationsSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -56,7 +25,6 @@ export function IntegrationsSection() {
       aria-labelledby="integrations-title"
     >
       <div className="research-section__intro">
-        <SectionIcon label="Hiring research illustration" />
         <p className="research-section__label">RESEARCH &amp; INSIGHTS</p>
         <h2 id="integrations-title" className="research-section__title">
           Facts for better hiring.
@@ -80,39 +48,16 @@ export function IntegrationsSection() {
             // Geometry calculations for resting fan layout:
             // Centered normalized offset (-1.5, -0.5, 0.5, 1.5 for 4 cards)
             const norm = index - (totalCards - 1) / 2
-            const restRotate = norm * 4.2
-            const restY = Math.abs(norm) * 6
+            const restRotate = norm * 4.0 // Exactly -6deg, -2deg, +2deg, +6deg matching reference video
+            const restY = Math.abs(norm) * 5
             const restZ = index + 1
 
-            // Dynamic transforms based on hover interaction matching reference video
-            let translateX = 0
-            let translateY = restY
-            let rotate = restRotate
-            let scale = 1
-            let zIndex = restZ
-
-            if (hoveredIndex !== null) {
-              if (isHovered) {
-                // Lifted, straightened, elevated foreground
-                translateX = 0
-                translateY = -42
-                rotate = 0
-                scale = 1.025
-                zIndex = 50
-              } else if (index < hoveredIndex) {
-                // Left neighbors shift slightly leftward
-                translateX = -14
-                translateY = restY
-                rotate = restRotate
-                zIndex = restZ
-              } else if (index > hoveredIndex) {
-                // Right neighbors shift slightly rightward
-                translateX = 14
-                translateY = restY
-                rotate = restRotate
-                zIndex = restZ
-              }
-            }
+            // Dynamic transforms matching reference video:
+            // Hovered card: lifts up vertically (-52px), straightens to 0deg, elevates to zIndex 50
+            // Neighboring cards remain stable in their resting fanned positions without horizontal drift
+            const translateY = isHovered ? -52 : restY
+            const rotate = isHovered ? 0 : restRotate
+            const zIndex = isHovered ? 50 : restZ
 
             return (
               <a
@@ -125,7 +70,7 @@ export function IntegrationsSection() {
                   isHovered ? 'is-lifted' : ''
                 }`}
                 style={{
-                  transform: `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`,
+                  transform: `translate3d(0, ${translateY}px, 0) rotate(${rotate}deg)`,
                   zIndex,
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
@@ -147,6 +92,9 @@ export function IntegrationsSection() {
                 >
                   <strong className="fanned-card__metric-val">{finding.metric}</strong>
                   <span className="fanned-card__metric-label">{finding.metricLabel}</span>
+                  {finding.source && (
+                    <span className="fanned-card__source">{finding.source}</span>
+                  )}
                 </div>
               </a>
             )

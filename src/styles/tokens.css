@@ -64,42 +64,43 @@
   --font-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Type Scale */
-  --text-page-heading: clamp(38px, 5.2vw, 58px);
-  --text-section-heading: clamp(28px, 3.8vw, 42px);
-  --text-card-heading: 20px;
-  --text-body: 16px;
-  --text-supporting: 14px;
-  --text-meta: 12px;
+  --text-hero-heading: clamp(30px, 3.2vw, 40px);
+  --text-page-heading: clamp(26px, 2.6vw, 34px);
+  --text-section-heading: clamp(22px, 2.2vw, 28px);
+  --text-card-heading: clamp(17px, 1.6vw, 19px);
+  --text-body: 14.5px;
+  --text-supporting: 13px;
+  --text-meta: 11.5px;
   --text-navigation: 13.5px;
-  --leading-body: 1.6;
-  --leading-tight: 1.15;
+  --leading-body: 1.55;
+  --leading-tight: 1.12;
 
   /* ─── Card Geometry & Shadows ─── */
   --radius-small: 8px;
-  --radius-medium: 14px;
-  --radius-large: 18px;
+  --radius-medium: 12px;
+  --radius-large: 14px;
   --radius-pill: 9999px;
 
-  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 3px 14px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.03);
 
-  /* Spacing Scale */
-  --space-1: 8px;
-  --space-2: 12px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-  --space-7: 64px;
-  --space-8: 88px;
+  /* Spacing Scale - Refined & Proportionate */
+  --space-1: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 22px;
+  --space-6: 32px;
+  --space-7: 42px;
+  --space-8: 56px;
 
   /* Layout Containers */
-  --content-width: 1240px;
-  --page-gutter: clamp(20px, 4vw, 48px);
-  --container-wide: 1240px;
-  --container-standard: 1160px;
-  --container-reading: 820px;
-  --container-header: 1200px;
-  --container-gutter: clamp(20px, 4vw, 48px);
+  --content-width: 1180px;
+  --page-gutter: clamp(16px, 3.2vw, 40px);
+  --container-wide: 1180px;
+  --container-standard: 1120px;
+  --container-reading: 780px;
+  --container-header: 1140px;
+  --container-gutter: clamp(16px, 3.2vw, 40px);
 }

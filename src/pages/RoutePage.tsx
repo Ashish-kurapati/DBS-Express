@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { basicApplicationUrl, dbsEligibilityUrl, dbsPerformanceUrl, dbsUmbrellaDirectoryUrl, digitalIdPricing, googleFontsPrivacyUrl, individualApplicationUrl, pricingTiers, selfEmployedDbsGuidanceUrl, signUpUrl, volunteerPricing } from '../data/siteContent'
+import { basicApplicationUrl, dbsEligibilityUrl, dbsPerformanceUrl, dbsUmbrellaDirectoryUrl, digitalIdPricing, googleFontsPrivacyUrl, individualApplicationUrl, pricingTiers, researchFindings, selfEmployedDbsGuidanceUrl, signUpUrl, volunteerPricing } from '../data/siteContent'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { IndividualJourneySections } from '../components/IndividualJourneySections'
-import { SectionIcon } from '../components/SectionIcon'
 import { FloatingStartButton } from '../components/FloatingStartButton'
 
 type PageSection = {
@@ -70,7 +69,6 @@ function PageHero({ eyebrow, title, description }: { eyebrow?: string; title: st
   const detail = words.length > 16 ? words.slice(16).join(' ') : ''
   return (
     <header className="route-page__hero">
-      <SectionIcon label="DBS check illustration" />
       {eyebrow && <p className="eyebrow"><span /> {eyebrow}</p>}
       <h1>{title}</h1>
       <p>{summary}</p>
@@ -90,7 +88,6 @@ function CtaBand({ title, description, href = '/apply', label = 'Choose an appli
   return (
     <section className="route-page__cta section-pad">
       <div>
-        <SectionIcon label="Application support illustration" />
         <h2>{title}</h2>
         <p>{summary}</p>
         {detail && <details className="route-page__hero-detail" name="page-details">
@@ -111,7 +108,6 @@ function SectionList({ sections, className = '' }: { sections: PageSection[]; cl
     <div className={`route-page__sections${className ? ` ${className}` : ''}`}>
       {sections.map((section) => <details className="route-page__section" key={section.title} name="page-details">
         <summary>
-          <SectionIcon label="Section illustration" />
           <h2>{section.title}</h2>
           <span className="route-page__section-toggle" aria-hidden="true">+</span>
         </summary>
@@ -119,7 +115,7 @@ function SectionList({ sections, className = '' }: { sections: PageSection[]; cl
           {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           {section.bullets && (
             <ul>
-              {section.bullets.map((bullet) => <li key={bullet}><span aria-hidden="true">✓</span>{bullet}</li>)}
+              {section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
             </ul>
           )}
           {section.links?.map((link) => {
@@ -143,7 +139,7 @@ function EmployersPage() {
   return <RouteLayout pageClassName="route-page--employers">
     <PageHero eyebrow="EMPLOYERS" title="DBS checks for employers" description="Order and track candidate checks from one employer portal, with required Digital ID and application progress." />
     <SectionList sections={[
-      { title: 'Candidate check workflow', paragraphs: ['Take a look at the actual 4-step workflow inside our accredited portal. From user creation to automated referee reminders and government submission.'], bullets: ['Candidate Setup — Add candidate details, assign internal departments, and enter targeted job roles in seconds.', 'Service Bundling — Select DBS checks and available additional services.', 'Eligibility Check — Confirm the lawful DBS level for the role.', 'Billing & Split — Configure how the organisation and candidate pay.'] },
+      { title: 'Candidate check workflow', paragraphs: ['Take a look at the actual 4-step workflow inside our accredited portal. From user creation to automated referee reminders and government submission.'], bullets: ['Candidate Setup — Add candidate details, assign internal departments, and enter targeted job roles in seconds.', 'Service Bundling — Select DBS checks and available additional services.', 'Candidate Verification — Review and verify candidate details.', 'Billing & Split — Configure how the organisation and candidate pay.'] },
       { title: 'Choose a check level', paragraphs: ['Compare Basic, Standard, and Enhanced eligibility criteria for your candidate roles.', 'Basic DBS checks show unspent convictions and conditional cautions. They are available for any purpose, including employment and personal use. Standard and Enhanced checks require an eligible role and an authorised application route.', volunteerPricingDisclosure] },
       { title: 'Workforce compliance tools', bullets: ['Free Right to Work Checks — Fully compliant UK Home Office Right to Work checks provided at zero extra cost alongside candidate DBS applications.', 'Automated Reference Checks (£2.95) — Hands-off referee management with automated chase reminders.', employerDigitalIdDisclosure, 'Flexible Payment Splitting — Configure whether your organisation pays 100%, splits costs, or has the candidate pay.', 'Role-Based Team Access — Assign Company Admins and departmental Evidence Checkers.', 'One-Click Excel Reports — Export compliance matrices and candidate progress trackers directly to Excel.'] },
     ]} />
@@ -152,43 +148,153 @@ function EmployersPage() {
 }
 
 function IndividualsPage() {
-  return <RouteLayout pageClassName="route-page--individuals">
-    <PageHero eyebrow="INDIVIDUALS" title="Apply for your own DBS check" description="Compare Basic and eligible Enhanced routes. No organisation account required." />
-    <IndividualJourneySections />
-    <SectionList sections={[
-      {
-        title: 'Individual application pricing',
-        paragraphs: [
-          'DBS Express Basic check breakdown: £20.00 government fee + £22.00 administration fee + £6.50 required Digital ID = £48.50 total. This breakdown is separate from the external personal application service linked below; this website does not provide an individual checkout.',
-          'The supported individual application provider publishes a Basic DBS price of £38.00 (£20.00 government fee + £18.00 administration fee) and an Enhanced DBS price of £71.00 (£41.00 government fee + £30.00 administration fee).',
-          'Digital identity and address checks are included in those published individual-service prices; no separate £6.50 Digital ID charge is added on that route. For employer-portal checks, required Digital ID is included in the displayed total.',
-          'You can also apply directly to GOV.UK for a Basic DBS check for the £20.00 government fee, without an administration charge.',
-        ],
-      },
-      {
-        title: 'Eligibility and options',
-        paragraphs: [
-          'Anyone can apply directly for a Basic DBS check. A Basic check costs £20.00 through GOV.UK.',
-          'Standard and Enhanced checks are available only when the role meets DBS eligibility rules. For checks submitted by an organisation, see the employer application options.',
-        ],
-        links: [{ label: 'See employer DBS check options', href: '/employers' }],
-      },
-      {
-        title: 'Self-employed? Enhanced checks may be available.',
-        paragraphs: [
-          'Eligible self-employed people and personal employees can apply for their own Enhanced or Enhanced with Barred List(s) check through a DBS Umbrella Body.',
-          'Eligibility depends on the role and applicable DBS rules. If you contract your services to an organisation, it may apply on your behalf under its policies. This site does not process self-employed applications.',
-        ],
-        links: [{ label: 'Read GOV.UK guidance for self-employed applicants', href: selfEmployedDbsGuidanceUrl }, { label: 'Find a DBS Umbrella Body on GOV.UK', href: dbsUmbrellaDirectoryUrl }],
-      },
-    ]} />
-    <CtaBand
-      title="Continue your application"
-      description="Basic and eligible Enhanced checks are available through the supported personal application route."
-      href="/apply/individual"
-      label="Apply for my own check"
-    />
-  </RouteLayout>
+  return (
+    <RouteLayout pageClassName="route-page--individuals">
+      <PageHero
+        eyebrow="INDIVIDUALS"
+        title="Apply for your own DBS check"
+        description="Compare Basic and eligible Enhanced routes. No organisation account required."
+      />
+      <IndividualJourneySections />
+
+      {/* ── Section 1: Visual Pricing Cards (Zinc-inspired) ── */}
+      <section className="individual-pricing-section section-pad" aria-labelledby="individual-pricing-title">
+        <div className="individual-pricing-header">
+          <p className="eyebrow"><span /> PRICING</p>
+          <h2 id="individual-pricing-title">Individual check pricing</h2>
+          <p className="individual-pricing-subtitle">
+            Clear, upfront pricing with all government and administration fees included.
+          </p>
+        </div>
+
+        <div className="individual-pricing-grid">
+          {/* Card 1: Basic DBS Check */}
+          <article className="individual-price-card">
+            <div className="individual-price-card__badge-row">
+              <span className="individual-price-card__badge">DIRECT APPLICATION</span>
+            </div>
+            <h3 className="individual-price-card__title">Basic DBS Check</h3>
+            <p className="individual-price-card__desc">
+              Official criminal record check showing unspent convictions and conditional cautions.
+            </p>
+            <div className="individual-price-card__price-wrap">
+              <span className="individual-price-card__currency">£</span>
+              <span className="individual-price-card__amount">42</span>
+              <span className="individual-price-card__period">total per check</span>
+            </div>
+            <p className="individual-price-card__breakdown">
+              £20.00 government fee + £22.00 administration fee
+            </p>
+            <a
+              className="button button-primary individual-price-card__cta"
+              href="/apply/individual"
+            >
+              Apply for Basic check <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          {/* Card 2: Digital ID Verification */}
+          <article className="individual-price-card">
+            <div className="individual-price-card__badge-row">
+              <span className="individual-price-card__badge individual-price-card__badge--neutral">ID ADD-ON</span>
+            </div>
+            <h3 className="individual-price-card__title">Digital ID Verification</h3>
+            <p className="individual-price-card__desc">
+              Fast online identity check completed on your smartphone without posting documents.
+            </p>
+            <div className="individual-price-card__price-wrap">
+              <span className="individual-price-card__currency">£</span>
+              <span className="individual-price-card__amount">6.50</span>
+              <span className="individual-price-card__period">per applicant</span>
+            </div>
+            <p className="individual-price-card__breakdown">
+              Identity verification add-on · Requirements verified during application
+            </p>
+            <a
+              className="button button-primary individual-price-card__cta"
+              href="/apply/individual"
+            >
+              Verify ID online <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        </div>
+
+        <p className="individual-pricing-govuk-note">
+          Applying directly on GOV.UK? Basic checks are £20.00 directly through GOV.UK without an administration fee.{' '}
+          <a href={basicApplicationUrl} target="_blank" rel="noreferrer">
+            Apply on GOV.UK <span aria-hidden="true">↗</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </p>
+      </section>
+
+      {/* ── Section 2: Eligibility Guidance (3 Concise Icon-led Statements) ── */}
+      <section className="individual-eligibility-section section-pad" aria-labelledby="individual-eligibility-title">
+        <div className="individual-eligibility-header">
+          <p className="eyebrow"><span /> ELIGIBILITY</p>
+          <h2 id="individual-eligibility-title">Which DBS check can you apply for?</h2>
+        </div>
+
+        <div className="individual-eligibility-lines">
+          {/* LINE 01 */}
+          <article className="individual-eligibility-line">
+            <div className="individual-eligibility-line__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <div className="individual-eligibility-line__content">
+              <h3 className="individual-eligibility-line__title">Individuals: Basic</h3>
+              <p className="individual-eligibility-line__desc">Individuals can apply for Basic DBS checks.</p>
+            </div>
+          </article>
+
+          {/* LINE 02 */}
+          <article className="individual-eligibility-line">
+            <div className="individual-eligibility-line__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+            </div>
+            <div className="individual-eligibility-line__content">
+              <h3 className="individual-eligibility-line__title">Self-employed: Enhanced may be possible</h3>
+              <p className="individual-eligibility-line__desc">Enhanced checks may be available depending on the role and eligibility requirements.</p>
+            </div>
+            <a className="individual-eligibility-line__link" href="/self-employed">
+              Read guidance <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          {/* LINE 03 */}
+          <article className="individual-eligibility-line">
+            <div className="individual-eligibility-line__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+                <path d="M9 22v-4h6v4" />
+                <path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01" />
+              </svg>
+            </div>
+            <div className="individual-eligibility-line__content">
+              <h3 className="individual-eligibility-line__title">Employers: All three</h3>
+              <p className="individual-eligibility-line__desc">Employers can request Basic, Standard and Enhanced checks where the role is eligible.</p>
+            </div>
+            <a className="individual-eligibility-line__link" href="/employers">
+              See employer options <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <CtaBand
+        title="Continue your application"
+        description="Basic and eligible Enhanced checks are available through the supported personal application route."
+        href="/apply/individual"
+        label="Apply for my own check"
+      />
+    </RouteLayout>
+  )
 }
 
 function ApplicationChoicePage() {
@@ -200,7 +306,6 @@ function ApplicationChoicePage() {
     />
     <div className="application-choice-grid section-pad">
       <section className="application-choice-card application-choice-card--individual">
-        <SectionIcon label="Individual application illustration" />
         <p className="eyebrow"><span /> INDIVIDUALS</p>
         <h2>Applying for yourself?</h2>
         <p>Apply for a Basic or eligible Enhanced check. No organisation account needed.</p>
@@ -209,7 +314,6 @@ function ApplicationChoicePage() {
         </a>
       </section>
       <section className="application-choice-card application-choice-card--employer">
-        <SectionIcon label="Employer application illustration" />
         <p className="eyebrow"><span /> EMPLOYERS</p>
         <h2>Registering as an employer?</h2>
         <p>Create an organisation account to manage DBS checks for employees, candidates, and eligible volunteers.</p>
@@ -231,7 +335,7 @@ function IndividualApplicationPage() {
     />
     <div className="individual-application-options section-pad">
       <details className="route-page__section" name="page-details">
-        <summary><SectionIcon label="Individual check illustration" /><h2>Basic or eligible Enhanced</h2><span className="route-page__section-toggle" aria-hidden="true">+</span></summary>
+        <summary><h2>Basic or eligible Enhanced</h2><span className="route-page__section-toggle" aria-hidden="true">+</span></summary>
         <div className="route-page__section-content">
         <p>The supported individual service provides the personal application form and explains the checks available to you. Its published prices include digital identity and address checks.</p>
         <a className="button button-primary" href={individualApplicationUrl} target="_blank" rel="noreferrer">
@@ -241,7 +345,7 @@ function IndividualApplicationPage() {
         </div>
       </details>
       <details className="route-page__section" name="page-details">
-        <summary><SectionIcon label="GOV.UK application illustration" /><h2>Apply directly on GOV.UK</h2><span className="route-page__section-toggle" aria-hidden="true">+</span></summary>
+        <summary><h2>Apply directly on GOV.UK</h2><span className="route-page__section-toggle" aria-hidden="true">+</span></summary>
         <div className="route-page__section-content">
         <p>For a Basic DBS check only, you can also apply directly through GOV.UK for the £20 government fee, without a provider administration fee.</p>
         <a className="button button-secondary" href={basicApplicationUrl} target="_blank" rel="noreferrer">
@@ -272,9 +376,9 @@ function PricingTable({ enhanced = false }: { enhanced?: boolean }) {
             <th scope="col">Volume Tier</th>
             <th scope="col">Annual Volume</th>
             <th scope="col">Government Fee</th>
-            <th scope="col">Admin fee</th>
+            <th scope="col">Admin Fee</th>
             <th scope="col">Required Digital ID</th>
-            <th scope="col" className="route-table__total-heading">Total to client</th>
+            <th scope="col" className="route-table__total-heading">Total to Client</th>
           </tr>
         </thead>
         <tbody>
@@ -285,10 +389,10 @@ function PricingTable({ enhanced = false }: { enhanced?: boolean }) {
                 <span className="route-table__desktop-volume">{row.tier}</span>
               </td>
               <td>{row.volume}</td>
-              <td data-label="Government fee">{row.governmentFee}</td>
-              <td data-label="Admin fee">{row.adminFee}</td>
+              <td data-label="Government Fee">{row.governmentFee}</td>
+              <td data-label="Admin Fee">{row.adminFee}</td>
               <td data-label="Required Digital ID">{row.digitalIdFee}</td>
-              <td className="route-table__total" data-label="Total to client">{row.total}</td>
+              <td className="route-table__total" data-label="Total to Client">{row.total}</td>
             </tr>
           ))}
         </tbody>
@@ -298,10 +402,25 @@ function PricingTable({ enhanced = false }: { enhanced?: boolean }) {
 }
 
 function PricingPage() {
-  return <RouteLayout>
+  return <RouteLayout pageClassName="route-page--pricing">
     <PageHero eyebrow="PRICING" title="Official DBS check prices" description="All-in prices include government fees, administration, and required Digital ID. No subscription charges." />
     <div className="route-page__pricing section-pad">
-      <section className="route-price-card"><SectionIcon label="DBS pricing illustration" /><h2>DBS check prices</h2><p>Government fees, administration, and required Digital ID included.</p><details name="page-details"><summary>Basic &amp; Standard checks</summary><p>Annual volume pricing. Digital ID included.</p><PricingTable /></details><details name="page-details"><summary>Enhanced checks</summary><p>Eligible roles only. Digital ID included.</p><PricingTable enhanced /></details></section>
+      <section className="route-price-card">
+        <h2>DBS check prices</h2>
+        <p>Government fees, administration, and required Digital ID included in every check tier.</p>
+        <div className="pricing-tables-stack">
+          <div className="pricing-table-block">
+            <h3>Basic &amp; Standard checks</h3>
+            <p className="pricing-table-subtitle">Annual volume pricing for organisations. Digital ID included.</p>
+            <PricingTable />
+          </div>
+          <div className="pricing-table-block">
+            <h3>Enhanced checks</h3>
+            <p className="pricing-table-subtitle">For eligible roles only. Digital ID included.</p>
+            <PricingTable enhanced />
+          </div>
+        </div>
+      </section>
       <SectionList className="pricing-billing-panel" sections={[{ title: 'Pricing & billing details', bullets: ['Each total combines the official DBS government fee, administration fee, and required Digital ID fee.', 'Basic and Standard administration fees decrease with annual submission volume, from £17.70 in Tier 1 to £14.10 in Tier 3.', 'Employers can choose whether the business covers 100% of the check fee, splits a designated percentage with the applicant, or has the applicant pay directly.', volunteerPricingDisclosure, digitalIdDisclosure] }]} />
     </div>
     <CtaBand title="Ready to start?" description="Choose an application route to submit checks and manage applicants." />
@@ -309,10 +428,71 @@ function PricingPage() {
 }
 
 function ResourcesPage() {
-  return <RouteLayout pageClassName="route-page--resources">
-    <PageHero eyebrow="RESOURCES" title="Resources and guides" description="Articles and official guidance about DBS checks in England and Wales." />
-    <div className="resource-list section-pad">{articleSummaries.map((article) => <article className="resource-card" key={article.path}><SectionIcon label={`${article.category} illustration`} /><div className="resource-card__meta"><span>{article.category}</span><span>{article.readTime}</span></div><h2><a href={article.path}>{article.title}</a></h2><p>{article.summary}</p><div className="resource-card__footer"><span>{article.date}</span><a href={article.path}>Read article →</a></div></article>)}</div>
-  </RouteLayout>
+  return (
+    <RouteLayout pageClassName="route-page--resources">
+      <PageHero
+        eyebrow="RESOURCES &amp; RESEARCH"
+        title="Resources, research and guides"
+        description="Official guidance, industry benchmarks and articles about DBS checks in England and Wales."
+      />
+
+      <section className="resources-research-section section-pad" aria-labelledby="resources-research-title">
+        <div className="resources-research-header">
+          <p className="eyebrow"><span /> RESEARCH &amp; INSIGHTS</p>
+          <h2 id="resources-research-title">Facts for better hiring</h2>
+          <p className="resources-research-desc">Evidence on screening, identity, and fair hiring from official and industry sources.</p>
+        </div>
+
+        <div className="resources-research-grid">
+          {researchFindings.map((finding) => (
+            <article className="resources-research-card" key={finding.category}>
+              <div className="resources-research-card__header">
+                <span className="resources-research-card__tag">{finding.category}</span>
+                <span className="resources-research-card__metric">{finding.metric}</span>
+              </div>
+              <h3 className="resources-research-card__title">{finding.title}</h3>
+              <p className="resources-research-card__label">{finding.metricLabel}</p>
+              <a
+                className="resources-research-card__link"
+                href={finding.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Read official source <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="resource-list-section section-pad" aria-labelledby="resources-articles-title">
+        <div className="resources-research-header">
+          <p className="eyebrow"><span /> GUIDES &amp; ARTICLES</p>
+          <h2 id="resources-articles-title">DBS guidance library</h2>
+          <p className="resources-research-desc">Key updates, turnaround time benchmarks and compliance obligations.</p>
+        </div>
+        <div className="resource-list">
+          {articleSummaries.map((article) => (
+            <article className="resource-card" key={article.path}>
+              <div className="resource-card__meta">
+                <span>{article.category}</span>
+                <span>{article.readTime}</span>
+              </div>
+              <h2>
+                <a href={article.path}>{article.title}</a>
+              </h2>
+              <p>{article.summary}</p>
+              <div className="resource-card__footer">
+                <span>{article.date}</span>
+                <a href={article.path}>Read article →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </RouteLayout>
+  )
 }
 
 function ArticlePage({ slug }: { slug: string }) {
@@ -322,7 +502,7 @@ function ArticlePage({ slug }: { slug: string }) {
     <article className="route-article section-pad">
       <a className="route-article__back" href="/resources">← Resources</a>
       <PageHero eyebrow={article.category} title={article.title} description={`${article.date} · DBS-Express compliance team · ${article.readTime}`} />
-      <details className="route-article__body" name="page-details"><summary><SectionIcon label="Article illustration" /><span>Read article</span></summary><div className="route-article__body-content"><p>{isFirstArticle ? 'Navigating Disclosure and Barring Service (DBS) requirements can feel complex. This guide breaks down essential rules for employers and applicants in England and Wales.' : article.summary}</p>{isFirstArticle ? <><h2>Key regulatory guidelines</h2><p>When conducting criminal record checks in England and Wales, organisations must ensure they hold a lawful basis for requesting information. Requesting an Enhanced check for an ineligible role is an offence under the Rehabilitation of Offenders Act 1974.</p><h2>Best practices for onboarding</h2><ul><li>Verify original ID documents in person or via approved digital identity service providers (IDSPs).</li><li>Maintain clear written policies on the recruitment of ex-offenders.</li><li>Ensure DBS certificate data is stored securely and destroyed in line with your retention schedule.</li></ul></> : <><h2>Source content status</h2><p>The reference listing provides the summary shown above. The full source article body was not independently available during this audit, so no additional wording has been invented here.</p></>}</div></details>
+      <details className="route-article__body" name="page-details"><summary><span>Read article</span></summary><div className="route-article__body-content"><p>{isFirstArticle ? 'Navigating Disclosure and Barring Service (DBS) requirements can feel complex. This guide breaks down essential rules for employers and applicants in England and Wales.' : article.summary}</p>{isFirstArticle ? <><h2>Key regulatory guidelines</h2><p>When conducting criminal record checks in England and Wales, organisations must ensure they hold a lawful basis for requesting information. Requesting an Enhanced check for an ineligible role is an offence under the Rehabilitation of Offenders Act 1974.</p><h2>Best practices for onboarding</h2><ul><li>Verify original ID documents in person or via approved digital identity service providers (IDSPs).</li><li>Maintain clear written policies on the recruitment of ex-offenders.</li><li>Ensure DBS certificate data is stored securely and destroyed in line with your retention schedule.</li></ul></> : <><h2>Source content status</h2><p>The reference listing provides the summary shown above. The full source article body was not independently available during this audit, so no additional wording has been invented here.</p></>}</div></details>
     </article>
     <CtaBand title="Need advice for your organisation?" description="Our team can help verify which check level your employees legally require under statutory legislation." href="/contact" label="Contact compliance advisors" />
   </RouteLayout>
@@ -339,11 +519,36 @@ function AboutPage() {
 function FaqPage() {
   const [query, setQuery] = useState('')
   const filtered = useMemo(() => faqItems.filter(([question, answer]) => `${question} ${answer}`.toLowerCase().includes(query.toLowerCase())), [query])
-  return <RouteLayout pageClassName="route-page--faq"><PageHero eyebrow="FAQ" title="DBS questions, answered" description="Answers about check levels, applications, eligibility, processing, and support." /><section className="faq-page section-pad"><SectionIcon label="Frequently asked questions illustration" /><label htmlFor="faq-search">Search questions</label><input id="faq-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the FAQ" />{filtered.length ? <div className="faq-page__list">{filtered.map(([question, answer]) => <details key={question} name="page-details"><summary>{question}</summary><p>{answer}</p></details>)}</div> : <p className="faq-page__empty">No questions matched your search.</p>}</section></RouteLayout>
+  return <RouteLayout pageClassName="route-page--faq"><PageHero eyebrow="FAQ" title="DBS questions, answered" description="Answers about check levels, applications, eligibility, processing, and support." /><section className="faq-page section-pad"><label htmlFor="faq-search">Search questions</label><input id="faq-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search the FAQ" />{filtered.length ? <div className="faq-page__list">{filtered.map(([question, answer]) => <details key={question} name="page-details"><summary>{question}</summary><p>{answer}</p></details>)}</div> : <p className="faq-page__empty">No questions matched your search.</p>}</section></RouteLayout>
 }
 
 function ContactPage() {
-  return <RouteLayout pageClassName="route-page--contact"><PageHero eyebrow="CONTACT" title="Get in touch" description="For application updates, use your dashboard. Contact support when you need help." /><SectionList sections={[{ title: 'Direct channels', paragraphs: ['Reach our team by phone, email, or post for guidance on organisational registration and eligibility.', 'Office address: Talaty Group Ltd, London, United Kingdom', 'Phone support: 01254 432655. Lines open 9am–5pm, Mon–Fri', 'Email enquiry: contact@dbs-express.co.uk. Mon–Fri responses within 24 hours', 'If you have already submitted an application through our platform, please log in directly to your dashboard to view real-time tracking updates.'] }]} /><CtaBand title="Ready to apply?" description="Choose the personal application route or register your organisation." href="/apply" label="Choose an application route" /></RouteLayout>
+  return <RouteLayout pageClassName="route-page--contact">
+    <PageHero eyebrow="CONTACT" title="Get in touch" description="Direct telephone, email, and postal channels for individual and employer support." />
+    <div className="contact-grid section-pad">
+      <article className="contact-card">
+        <p className="eyebrow"><span /> TELEPHONE SUPPORT</p>
+        <h2>01254 432655</h2>
+        <p>Lines open Monday to Friday, 9:00am – 5:00pm. Direct access to our UK team for questions on check levels and registration.</p>
+        <a className="button button-primary" href="tel:01254432655">Call 01254 432655</a>
+      </article>
+
+      <article className="contact-card">
+        <p className="eyebrow"><span /> EMAIL ENQUIRIES</p>
+        <h2>contact@dbs-express.co.uk</h2>
+        <p>Email our dedicated support desk. We respond Monday through Friday, usually within 24 hours.</p>
+        <a className="button button-secondary" href="mailto:contact@dbs-express.co.uk">Send an email</a>
+      </article>
+
+      <article className="contact-card">
+        <p className="eyebrow"><span /> REGISTERED OFFICE</p>
+        <h2>Talaty Group Ltd</h2>
+        <p>London, United Kingdom. Registered in England &amp; Wales. Providing compliant DBS processing nationwide.</p>
+      </article>
+    </div>
+    <SectionList sections={[{ title: 'Existing application updates', paragraphs: ['If you have already submitted an application through our platform, please log in directly to your dashboard to view real-time tracking updates.', 'Official paper certificates are dispatched by DBS directly to the applicant’s home address upon completion.'] }]} />
+    <CtaBand title="Ready to apply?" description="Choose the personal application route or register your organisation." href="/apply" label="Choose an application route" />
+  </RouteLayout>
 }
 
 function MaintenancePage() {
@@ -358,10 +563,10 @@ function TeamPage() {
   return <RouteLayout pageClassName="route-page--how-we-work">
     <PageHero eyebrow="HOW WE WORK" title="How we work" description="Understand check eligibility, choose an application route, and contact support when you need help." />
     <div className="how-we-work-grid section-pad">
-      <article><SectionIcon label="Eligibility illustration" /><span aria-hidden="true">01</span><h2>Start with eligibility</h2><p>Check the role against official DBS guidance before choosing a check level.</p><a href={dbsEligibilityUrl} target="_blank" rel="noreferrer">Read GOV.UK guidance <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
-      <article><SectionIcon label="Application route illustration" /><span aria-hidden="true">02</span><h2>Choose your route</h2><p>Individuals and employers use separate application routes on this website.</p><a href="/apply">Choose an application route <span aria-hidden="true">→</span></a></article>
-      <article><SectionIcon label="Support illustration" /><span aria-hidden="true">03</span><h2>Ask for support</h2><p>Contact the DBS-Express team for questions about site information and employer access.</p><a href="/contact">Contact support <span aria-hidden="true">→</span></a></article>
-      <article><SectionIcon label="Service target illustration" /><span aria-hidden="true">04</span><h2>DBS service targets</h2><p>Published processing targets are not guarantees. DBS controls processing and extra checks can take longer.</p><a href={dbsPerformanceUrl} target="_blank" rel="noreferrer">DBS performance and annual report <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
+      <article><span aria-hidden="true">01</span><h2>Start with eligibility</h2><p>Check the role against official DBS guidance before choosing a check level.</p><a href={dbsEligibilityUrl} target="_blank" rel="noreferrer">Read GOV.UK guidance <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
+      <article><span aria-hidden="true">02</span><h2>Choose your route</h2><p>Individuals and employers use separate application routes on this website.</p><a href="/apply">Choose an application route <span aria-hidden="true">→</span></a></article>
+      <article><span aria-hidden="true">03</span><h2>Ask for support</h2><p>Contact the DBS-Express team for questions about site information and employer access.</p><a href="/contact">Contact support <span aria-hidden="true">→</span></a></article>
+      <article><span aria-hidden="true">04</span><h2>DBS service targets</h2><p>Published processing targets are not guarantees. DBS controls processing and extra checks can take longer.</p><a href={dbsPerformanceUrl} target="_blank" rel="noreferrer">DBS performance and annual report <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
     </div>
   </RouteLayout>
 }
@@ -406,7 +611,7 @@ function TermsPage() {
 }
 
 function NotFoundPage({ path }: { path: string }) {
-  return <RouteLayout><PageHero eyebrow="404" title="Page not found" description={`We could not find ${path}.`} /><section className="route-page__notice section-pad"><SectionIcon label="Page not found illustration" /><h2>Try another destination</h2><p>Use the main navigation to find DBS guidance, support, resources, and company information.</p><div className="route-page__actions"><a className="button button-primary" href="/">Return home</a><a className="button button-secondary" href="/contact">Contact support</a></div></section></RouteLayout>
+  return <RouteLayout><PageHero eyebrow="404" title="Page not found" description={`We could not find ${path}.`} /><section className="route-page__notice section-pad"><h2>Try another destination</h2><p>Use the main navigation to find DBS guidance, support, resources, and company information.</p><div className="route-page__actions"><a className="button button-primary" href="/">Return home</a><a className="button button-secondary" href="/contact">Contact support</a></div></section></RouteLayout>
 }
 
 function RouteLayout({ children, pageClassName = '' }: { children: ReactNode; pageClassName?: string }) {

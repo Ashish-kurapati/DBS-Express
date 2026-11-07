@@ -71,10 +71,9 @@ const MODERN_ITEMS: readonly DockItem[] = [
   { id: "individuals", label: "Individuals", href: "/individuals", icon: <><circle cx="8" cy="5" r="2.4" /><path d="M3.2 13.7c.5-2.6 2.1-4 4.8-4s4.3 1.4 4.8 4" /></> },
   { id: "employers", label: "Employers", href: "/employers", icon: <><circle cx="5.2" cy="5" r="2" /><circle cx="10.8" cy="5" r="2" /><path d="M1.8 13.5c.3-2.2 1.4-3.4 3.4-3.4s3.1 1.2 3.4 3.4M7.4 10.5c.7-.7 1.7-1 3-1 2.1 0 3.4 1.3 3.8 4" /></> },
   { id: "self-employed", label: "Self-employed", href: "/self-employed", icon: <><rect x="2" y="3" width="12" height="10" rx="1.5" /><path d="M5 6h6M5 8.5h6M5 11h3" /></> },
-  { id: "track", label: "Track my DBS", href: "https://www.gov.uk/guidance/dbs-check-requests-guidance-for-employers#how-to-track-a-dbs-application", external: true, target: "_blank", icon: <><circle cx="7" cy="7" r="4.5" /><path d="m10.5 10.5 3 3M5 7h4M7 5v4" /></> },
   { id: "pricing", label: "Pricing", href: "/pricing", sectionId: "pricing", icon: <><path d="M8.6 2.2H13v4.4l-6.6 6.6a1.2 1.2 0 0 1-1.7 0L2.2 10.5a1.2 1.2 0 0 1 0-1.7z" /><circle cx="10.6" cy="4.6" r=".9" /></> },
-  { id: "guidance", label: "Check guidance", href: "/#check-guidance", sectionId: "check-guidance", icon: <><circle cx="8" cy="8" r="6" /><path d="M6.3 6a1.8 1.8 0 1 1 3.3 1c-.7.8-1.6 1-1.6 2.3M8 11.7v.1" /></> },
   { id: "how-we-work", label: "How we work", href: "/team", icon: <><path d="M3 2.5h8l2 2v9H3z" /><path d="M5.5 7h5M5.5 9.5h5M5.5 12h3" /></> },
+  { id: "contact", label: "Contact", href: "/contact", sectionId: "contact", icon: <><path d="M4 2.25h5.4L12 4.85v8.9H4z" /><path d="M9.25 2.25V5h2.7M6 8h4M6 10.5h4" /></> },
 ];
 
 /* every retro glyph is drawn on a 7x7 lattice of whole units so the icons stay
@@ -401,7 +400,7 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
                 }
               }}
             >
-              <span>Start building</span>
+              <span>Contact us</span>
               <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8h9.1M8.6 4.3 12.4 8l-3.8 3.7" /></svg>
             </a>
           </div>

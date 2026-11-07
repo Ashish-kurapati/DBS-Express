@@ -14,9 +14,7 @@ export const navigation = [
   { label: 'Individuals', href: '/individuals' },
   { label: 'Employers', href: '/employers' },
   { label: 'Self-employed', href: '/self-employed' },
-  { label: 'Track my DBS', href: trackDbsUrl, external: true },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Check guidance', href: '/#check-guidance' },
   { label: 'How we work', href: '/team' },
   { label: 'Resources', href: '/resources' },
   { label: 'About', href: '/about' },
@@ -170,7 +168,6 @@ export const footerGroups = [
       ['Employers & HR teams', '/employers'],
       ['Individual applicants', '/individuals'],
       ['Self-employed', '/self-employed'],
-      ['Track my DBS', trackDbsUrl],
       ['Portal login →', loginUrl],
     ],
   },
@@ -205,3 +202,38 @@ export const footerGroups = [
 export function sourceLink(path: string) {
   return path.startsWith('https://') ? path : path
 }
+
+export const researchFindings = [
+  {
+    category: 'Candidate integrity',
+    title: 'CV claims deserve verification.',
+    metric: '18%',
+    metricLabel: 'of UK respondents said they or someone they knew had lied on a CV or job application in the previous 12 months.',
+    source: 'Source: Cifas Fraud Behaviours Survey, 2025.',
+    href: 'https://www.cifas.org.uk/',
+  },
+  {
+    category: 'Identity security',
+    title: 'Identity fraud remains a major UK risk.',
+    metric: '54%',
+    metricLabel: 'of reported fraud cases recorded in the Cifas National Fraud Database in 2025 involved identity fraud.',
+    source: 'Source: Cifas Fraudscape 2026.',
+    href: 'https://www.cifas.org.uk/',
+  },
+  {
+    category: 'Right to work',
+    title: 'Compliance failures carry serious financial consequences.',
+    metric: '£74M+',
+    metricLabel: 'in civil penalties issued to more than 1,200 businesses for employing people illegally during January–June 2026.',
+    source: 'Source: UK Home Office, 2026.',
+    href: 'https://www.gov.uk/government/organisations/home-office',
+  },
+  {
+    category: 'Employer responsibility',
+    title: "Verification is every employer's responsibility.",
+    metric: '89%',
+    metricLabel: 'of surveyed UK employers understood that employers are responsible for carrying out right-to-work checks.',
+    source: 'Source: UK Home Office employer research, 2026.',
+    href: 'https://www.gov.uk/government/publications/right-to-work-checks-employers-guide',
+  },
+]

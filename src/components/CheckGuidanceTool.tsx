@@ -135,7 +135,7 @@ export function CheckGuidanceTool() {
       </div>
       <div className="check-guidance-card">
         <div className="check-guidance-card__visual" aria-hidden="true">
-          <span className="check-guidance-card__visual-icon">✓</span>
+          <span className="check-guidance-card__visual-icon">★</span>
           <span className="check-guidance-card__visual-caption">Role first</span>
         </div>
         {!complete ? (

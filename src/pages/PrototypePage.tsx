@@ -262,7 +262,7 @@ function NextStepsSection({ variant }: { variant: PrototypeVariant }) {
       aria-labelledby="next-steps-title"
     >
       <div>
-        <p className="eyebrow"><span /> DB-EXPRESS</p>
+        <p className="eyebrow"><span /> DBS-EXPRESS</p>
         <h2 id="next-steps-title">Continue to the service when you're ready.</h2>
       </div>
       <div className="next-steps-actions">

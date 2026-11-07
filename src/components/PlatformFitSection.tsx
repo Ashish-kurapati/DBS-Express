@@ -48,7 +48,6 @@ export function PlatformFitSection() {
             <ul>
               {item.details.map((detail) => (
                 <li key={detail}>
-                  <span aria-hidden="true">✓</span>
                   <span>{detail}</span>
                 </li>
               ))}
