@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { dbsPerformanceUrl } from '../data/siteContent'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { WorkflowSection } from '../components/WorkflowSection'
@@ -41,13 +40,6 @@ function Hero() {
   return (
     <section className="hero-section" aria-labelledby="hero-title">
       <div className="hero-copy reveal-on-scroll">
-        <div className="hero-rating-badge">
-          <div className="hero-rating-stars" aria-hidden="true">
-            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-          </div>
-          <span className="hero-rating-text">Official Registered Umbrella Body · Fast-Track Verification</span>
-        </div>
-
         <h1 id="hero-title" className="hero-quote-headline">
           Verify smarter.<br />
           Move faster.<br />
@@ -204,150 +196,143 @@ function FaqSection() {
         <p>Short answers about check levels, applications, and eligibility.</p>
       </div>
       <div className="faq-list">
-          <details className="faq-item">
-            <summary>
-              <span>How do DBS check levels differ?</span>
-              <span className="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div className="faq-content">
-              <p>
-                Each level can show different information, and Standard and Enhanced checks are only
-                available for roles that meet legal eligibility requirements.{' '}
-                <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about" target="_blank" rel="noreferrer">
-                  Read the DBS guidance <span aria-hidden="true">↗</span>
-                </a>
-              </p>
-            </div>
-          </details>
-            <details className="faq-item">
-              <summary>
-                <span>Can I apply for Basic?</span>
-                <span className="faq-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div className="faq-content">
-                <p>
-                  Yes. A person can apply for a Basic check directly; an employer can also apply with the
-                  applicant’s consent.{' '}
-                  <a href="/apply/individual">
-                    Apply for a Basic check <span aria-hidden="true">↗</span>
-                  </a>
-                </p>
-              </div>
-            </details>
-              <details className="faq-item">
-                <summary>
-                  <span>Who can request higher-level checks?</span>
-                  <span className="faq-toggle" aria-hidden="true">+</span>
-                </summary>
-                <div className="faq-content">
-                  <p>
-                    No. These checks are limited to roles that meet the legal eligibility criteria. The
-                    recruiting organisation should confirm the correct level for the role.
-                  </p>
-                </div>
-              </details>
-                <details className="faq-item">
-                  <summary>
-                    <span>Where can I get application help?</span>
-                    <span className="faq-toggle" aria-hidden="true">+</span>
-                  </summary>
-                  <div className="faq-content">
-                    <p>
-                      Contact the DBS-Express team for support with choosing a check or completing an
-                      application.{' '}
-                      <a href="/contact">
-                        Contact DBS-Express <span aria-hidden="true">↗</span>
-                      </a>
-                    </p>
-                  </div>
-                </details>
-              </div>
-            </section>
-            )
+        <details className="faq-item">
+          <summary>
+            <span>How do DBS check levels differ?</span>
+            <span className="faq-toggle" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 4.5L6 8l3.5-3.5" /></svg>
+            </span>
+          </summary>
+          <div className="faq-content">
+            <p>
+              Each level can show different information, and Standard and Enhanced checks are only
+              available for roles that meet legal eligibility requirements.{' '}
+              <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about" target="_blank" rel="noreferrer">
+                Read the DBS guidance <span aria-hidden="true">↗</span>
+              </a>
+            </p>
+          </div>
+        </details>
+        <details className="faq-item">
+          <summary>
+            <span>Can I apply for Basic?</span>
+            <span className="faq-toggle" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 4.5L6 8l3.5-3.5" /></svg>
+            </span>
+          </summary>
+          <div className="faq-content">
+            <p>
+              Yes. A person can apply for a Basic check directly; an employer can also apply with the
+              applicant’s consent.{' '}
+              <a href="/apply/individual">
+                Apply for a Basic check <span aria-hidden="true">↗</span>
+              </a>
+            </p>
+          </div>
+        </details>
+        <details className="faq-item">
+          <summary>
+            <span>Who can request higher-level checks?</span>
+            <span className="faq-toggle" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 4.5L6 8l3.5-3.5" /></svg>
+            </span>
+          </summary>
+          <div className="faq-content">
+            <p>
+              No. These checks are limited to roles that meet the legal eligibility criteria. The
+              recruiting organisation should confirm the correct level for the role.
+            </p>
+          </div>
+        </details>
+        <details className="faq-item">
+          <summary>
+            <span>Where can I get application help?</span>
+            <span className="faq-toggle" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 4.5L6 8l3.5-3.5" /></svg>
+            </span>
+          </summary>
+          <div className="faq-content">
+            <p>
+              Contact the DBS-Express team for support with choosing a check or completing an
+              application.{' '}
+              <a href="/contact">
+                Contact DBS-Express <span aria-hidden="true">↗</span>
+              </a>
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+  )
 }
 
-            function NextStepsSection() {
+function NextStepsSection() {
   return (
-            <section className="next-steps-section section-pad reveal-on-scroll" id="contact" aria-labelledby="next-steps-title">
-              <div>
-                <p className="eyebrow"><span /> CONTACT &amp; SUPPORT</p>
-                <h2 id="next-steps-title">Have questions or need help?</h2>
-                <p className="next-steps-copy">
-                  Speak with our UK team directly on <strong>01254 432655</strong> (9am–5pm, Mon–Fri) or email <strong>contact@dbs-express.co.uk</strong>.
-                </p>
-              </div>
-              <div className="next-steps-actions">
-                <a className="button button-primary" href="/contact">
-                  Contact support <span aria-hidden="true">→</span>
-                </a>
-                <a className="button button-secondary" href="/apply">
-                  Start an application <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </section>
-            )
+    <section className="next-steps-section section-pad reveal-on-scroll" id="contact" aria-labelledby="next-steps-title">
+      <div>
+        <p className="eyebrow"><span /> CONTACT &amp; SUPPORT</p>
+        <h2 id="next-steps-title">Have questions or need help?</h2>
+        <p className="next-steps-copy">
+          Speak with our UK team directly on <strong>01254 432655</strong> (9am–5pm, Mon–Fri) or email <strong>contact@dbs-express.co.uk</strong>.
+        </p>
+      </div>
+      <div className="next-steps-actions">
+        <a className="button button-primary" href="/contact">
+          Contact support <span aria-hidden="true">→</span>
+        </a>
+        <a className="button button-secondary" href="/apply">
+          Start an application <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+  )
 }
 
-            export function HomePage() {
+export function HomePage() {
   const mainRef = useScrollRevealContainer<HTMLElement>()
 
   useEffect(() => {
     const handleHash = () => {
       const rawHash = window.location.hash.replace(/^#/, '').toLowerCase()
-              if (!rawHash) return
-              const targetId =
-              rawHash === 'dbs-checks'
-              ? 'services'
-              : rawHash === 'how-it-works'
-              ? 'workflow'
-              : rawHash === 'faqs'
+      if (!rawHash) return
+      const targetId =
+        rawHash === 'dbs-checks'
+          ? 'services'
+          : rawHash === 'how-it-works'
+            ? 'workflow'
+            : rawHash === 'faqs'
               ? 'faq'
               : rawHash
 
-              const el = document.getElementById(targetId) || document.getElementById(rawHash)
-              if (el) {
-                setTimeout(() => {
-                  el.scrollIntoView({ behavior: 'smooth' })
-                }, 80)
-              }
+      const el = document.getElementById(targetId) || document.getElementById(rawHash)
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }, 80)
+      }
     }
 
-              handleHash()
-              window.addEventListener('hashchange', handleHash)
+    handleHash()
+    window.addEventListener('hashchange', handleHash)
     return () => window.removeEventListener('hashchange', handleHash)
   }, [])
 
-              return (
-              <div className="site-shell">
-                <a className="skip-link" href="#main-content">Skip to content</a>
-                <SiteHeader />
-                <main id="main-content" ref={mainRef}>
-                  <Hero />
-                  <CheckTypesSection />
-                  <WorkflowSection />
-                  <DBSStatsSection />
-                  <div className="dbs-turnaround-source-wrap section-pad">
-                      <details className="dbs-turnaround-details">
-                        <summary>
-                          <span>More about processing times</span>
-                          <span className="faq-toggle" aria-hidden="true">+</span>
-                        </summary>
-                        <div className="faq-content">
-                          <p>DBS controls processing. Some applications need additional checks or police enquiries.</p>
-                        </div>
-                      </details>
-                      <a className="dbs-turnaround-source" href={dbsPerformanceUrl} target="_blank" rel="noreferrer">
-                        DBS performance and annual report <span aria-hidden="true">↗</span>
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
-                  </div>
-                  <IntegrationsSection />
-                  <PricingSection />
-                  <FaqSection />
-                  <NextStepsSection />
-                </main>
-                <SiteFooter />
-                <FloatingStartButton />
-              </div>
-              )
+  return (
+    <div className="site-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <SiteHeader />
+      <main id="main-content" ref={mainRef}>
+        <Hero />
+        <CheckTypesSection />
+        <WorkflowSection />
+        <DBSStatsSection />
+        <IntegrationsSection />
+        <PricingSection />
+        <FaqSection />
+        <NextStepsSection />
+      </main>
+      <SiteFooter />
+      <FloatingStartButton />
+    </div>
+  )
 }

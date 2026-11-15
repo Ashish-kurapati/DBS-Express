@@ -60,6 +60,7 @@ type DockItem = {
 };
 
 const ITEMS: readonly DockItem[] = [
+  { id: "home", label: "Home", href: "/", icon: <path d="M2.5 7.2 8 2.8l5.5 4.4v5.8a1 1 0 0 1-1 1h-3.2v-3.5h-2.6V14H3.5a1 1 0 0 1-1-1z" /> },
   { id: "services", label: "DBS checks", href: "/#services", sectionId: "services", icon: <><rect x="2.25" y="2.25" width="4.5" height="4.5" rx=".8" /><rect x="9.25" y="2.25" width="4.5" height="4.5" rx=".8" /><rect x="2.25" y="9.25" width="4.5" height="4.5" rx=".8" /><rect x="9.25" y="9.25" width="4.5" height="4.5" rx=".8" /></> },
   { id: "workflow", label: "How it works", href: "/#workflow", sectionId: "workflow", icon: <><circle cx="3" cy="8" r="1.5" /><circle cx="12.5" cy="3.5" r="1.5" /><circle cx="12.5" cy="12.5" r="1.5" /><path d="M4.5 7.3 11 4.2M4.5 8.7l6.5 3.1" /></> },
   { id: "pricing", label: "Pricing", href: "/pricing", sectionId: "pricing", icon: <><rect x="2" y="3" width="12" height="10" rx="1.5" /><path d="M2 6h12M5 4.5h.01M7 4.5h.01" /></> },
@@ -68,6 +69,7 @@ const ITEMS: readonly DockItem[] = [
 ];
 
 const MODERN_ITEMS: readonly DockItem[] = [
+  { id: "home", label: "Home", href: "/", icon: <path d="M2.5 7.2 8 2.8l5.5 4.4v5.8a1 1 0 0 1-1 1h-3.2v-3.5h-2.6V14H3.5a1 1 0 0 1-1-1z" /> },
   { id: "individuals", label: "Individuals", href: "/individuals", icon: <><circle cx="8" cy="5" r="2.4" /><path d="M3.2 13.7c.5-2.6 2.1-4 4.8-4s4.3 1.4 4.8 4" /></> },
   { id: "employers", label: "Employers", href: "/employers", icon: <><circle cx="5.2" cy="5" r="2" /><circle cx="10.8" cy="5" r="2" /><path d="M1.8 13.5c.3-2.2 1.4-3.4 3.4-3.4s3.1 1.2 3.4 3.4M7.4 10.5c.7-.7 1.7-1 3-1 2.1 0 3.4 1.3 3.8 4" /></> },
   { id: "self-employed", label: "Self-employed", href: "/self-employed", icon: <><rect x="2" y="3" width="12" height="10" rx="1.5" /><path d="M5 6h6M5 8.5h6M5 11h3" /></> },
@@ -197,8 +199,11 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
   const variant = optionsRef.current.variant;
   const items = VARIANT_ITEMS[variant] ?? ITEMS;
   const getActiveId = () => {
-    if (typeof window === "undefined") return items[0]?.id ?? "services";
-    const path = window.location.pathname;
+    if (typeof window === "undefined") return "home";
+    const rawPath = window.location.pathname;
+    const path = rawPath.endsWith("/index.html")
+      ? "/"
+      : rawPath.replace(/\/$/, "") || "/";
     const hash = window.location.hash.toLowerCase();
     if (path === "/pricing" || hash === "#pricing") return "pricing";
     if (path === "/faq" || hash === "#faq" || hash === "#faqs") return "faq";
@@ -207,10 +212,8 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
     if (path === "/employers") return "employers";
     if (path === "/self-employed") return "self-employed";
     if (path === "/team") return "how-we-work";
-    if (path === "/" && hash === "#check-guidance") return "guidance";
-    if (hash === "#services" || hash === "#dbs-checks") return "individuals";
-    if (hash === "#workflow" || hash === "#how-it-works") return "how-we-work";
-    return items[0]?.id ?? "services";
+    if (path === "/" || path === "") return "home";
+    return items[0]?.id ?? "home";
   };
 
   const [active, setActive] = useState(getActiveId);
@@ -303,10 +306,14 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
       return;
     }
 
-    // Case 3: Page route (e.g. "/pricing", "/faq", "/contact")
+    // Case 3: Page route (e.g. "/", "/individuals", "/pricing", "/faq", "/contact")
     if (item.href?.startsWith("/")) {
       e.preventDefault();
-      if (window.location.pathname !== item.href) {
+      const targetPath = item.href === "/" ? "/" : item.href.replace(/\/$/, "");
+      const currentPath = window.location.pathname.endsWith("/index.html")
+        ? "/"
+        : window.location.pathname.replace(/\/$/, "") || "/";
+      if (currentPath !== targetPath) {
         window.history.pushState(null, "", item.href);
         window.dispatchEvent(new PopStateEvent("popstate"));
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -327,6 +334,7 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
         target={item.target}
         rel={item.target === "_blank" ? "noreferrer" : undefined}
         aria-current={active === item.id ? "page" : undefined}
+        aria-pressed={active === item.id}
         onClick={(e) => {
           setMobileMenuOpen(false);
           navigateTo(e, item);
@@ -413,6 +421,7 @@ export function AnimatedTopDock({ className = "", ...props }: AnimatedTopDockPro
               target={item.target}
               rel={item.target === "_blank" ? "noreferrer" : undefined}
               aria-current={active === item.id ? "page" : undefined}
+              aria-pressed={active === item.id}
               onClick={(event) => {
                 setMobileMenuOpen(false);
                 navigateTo(event, item);

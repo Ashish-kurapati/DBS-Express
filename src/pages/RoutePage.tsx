@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { basicApplicationUrl, dbsEligibilityUrl, dbsPerformanceUrl, dbsUmbrellaDirectoryUrl, digitalIdPricing, googleFontsPrivacyUrl, individualApplicationUrl, pricingTiers, researchFindings, selfEmployedDbsGuidanceUrl, signUpUrl, volunteerPricing } from '../data/siteContent'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
-import { DBSStatsSection } from '../components/DBSStatsSection'
 import { CandidateCheckWorkflow } from '../components/CandidateCheckWorkflow'
 import { FloatingStartButton } from '../components/FloatingStartButton'
 import { useScrollRevealContainer } from '../hooks/useScrollReveal'
@@ -166,22 +165,22 @@ function EmployersPage() {
           </div>
         </div>
 
-        <div className="employer-hero__preview" aria-label="DBS-Express employer management portal preview">
+        <div className="employer-hero__preview" aria-label="UK employers and HR teams managing background screening">
           <div className="employer-hero__preview-bar">
             <div className="employer-hero__preview-dots" aria-hidden="true">
               <span />
               <span />
               <span />
             </div>
-            <span className="employer-hero__preview-label">dbs-express.co.uk/portal</span>
-            <span className="employer-hero__preview-label" style={{ opacity: 0.6 }}>eBulk · SSL</span>
+            <span className="employer-hero__preview-label">dbs-express.co.uk/employers</span>
+            <span className="employer-hero__preview-label" style={{ opacity: 0.6 }}>eBulk · Registered Body</span>
           </div>
           <img
-            src="/assets/candidate-dashboard.jpg"
-            alt="Candidate management dashboard showing verification status"
+            src="/assets/employer-meeting.jpg"
+            alt="UK business leadership and compliance team conducting applicant background vetting in London overlooking Tower Bridge"
             className="employer-hero__preview-img"
             width="580"
-            height="320"
+            height="360"
             loading="eager"
           />
         </div>
@@ -382,32 +381,45 @@ function IndividualsPage() {
     <RouteLayout pageClassName="route-page--individuals">
       {/* ── Individuals Hero ── */}
       <header className="individual-hero reveal-on-scroll">
-        <p className="eyebrow"><span /> INDIVIDUALS</p>
-        <h1>Apply for your own DBS check</h1>
-        <p className="individual-hero__desc">
-          Compare Basic and eligible Enhanced routes. No organisation account required.
-        </p>
+        <div className="individual-hero__content">
+          <p className="eyebrow"><span /> INDIVIDUALS</p>
+          <h1>Apply for your own DBS check</h1>
+          <p className="individual-hero__desc">
+            Compare Basic and eligible Enhanced routes. No organisation account required.
+          </p>
 
-        <div className="individual-hero__trust-strip">
-          <span className="individual-hero__trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            Direct Personal Application
-          </span>
-          <span className="individual-hero__trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            Official DBS Certificate
-          </span>
-          <span className="individual-hero__trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-            No Employer Sponsorship Required
-          </span>
+          <div className="individual-hero__trust-strip">
+            <span className="individual-hero__trust-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Direct Personal Application
+            </span>
+            <span className="individual-hero__trust-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Official DBS Certificate
+            </span>
+            <span className="individual-hero__trust-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              No Employer Sponsorship Required
+            </span>
+          </div>
+        </div>
+
+        <div className="individual-hero__visual" aria-label="Individual applicant completing DBS verification">
+          <img
+            src="/assets/individual-applicant.jpg"
+            alt="Individual applicant in consultation for personal DBS criminal record check"
+            className="individual-hero__img"
+            width="520"
+            height="346"
+            loading="eager"
+          />
         </div>
       </header>
 
@@ -480,25 +492,6 @@ function IndividualsPage() {
           </a>
         </div>
       </section>
-
-      {/* ── Official Service Targets & Turnaround ── */}
-      <DBSStatsSection />
-
-      <div className="dbs-turnaround-source-wrap section-pad">
-        <details className="dbs-turnaround-details">
-          <summary>
-            <span>More about processing times</span>
-            <span className="faq-toggle" aria-hidden="true">+</span>
-          </summary>
-          <div className="faq-content">
-            <p>DBS controls processing. Some applications need additional checks or police enquiries.</p>
-          </div>
-        </details>
-        <a className="dbs-turnaround-source" href={dbsPerformanceUrl} target="_blank" rel="noreferrer">
-          DBS performance and annual report <span aria-hidden="true">↗</span>
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>
-      </div>
 
       {/* ── Individual Check Pricing ── */}
       <section className="individual-pricing-section section-pad reveal-on-scroll" aria-labelledby="individual-pricing-title">
@@ -1011,7 +1004,9 @@ function FaqPage() {
               <details key={question} className="faq-page-item">
                 <summary>
                   <span>{question}</span>
-                  <span className="faq-toggle" aria-hidden="true">+</span>
+                  <span className="faq-toggle" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 4.5L6 8l3.5-3.5" /></svg>
+                  </span>
                 </summary>
                 <div className="faq-content">
                   <p>{answer}</p>

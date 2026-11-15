@@ -3836,6 +3836,58 @@ input:focus-visible {
   margin: 0 0 clamp(20px, 2.6vw, 28px);
 }
 
+.workflow-visual-section__header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(24px, 3vw, 40px);
+  margin-bottom: clamp(24px, 3.2vw, 36px);
+}
+
+.workflow-visual-section__header-row .workflow-visual-section__header {
+  margin-bottom: 0;
+}
+
+.workflow-visual-section__photo-frame {
+  flex-shrink: 0;
+  width: clamp(200px, 22vw, 290px);
+  aspect-ratio: 16 / 11;
+  border-radius: var(--radius-medium, 10px);
+  overflow: hidden;
+  border: 1px solid var(--border-grey);
+  box-shadow: 0 4px 18px rgb(29 35 42 / 6%);
+  background: var(--pure-white);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .workflow-visual-section__photo-frame:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgb(29 35 42 / 10%);
+  }
+}
+
+.workflow-visual-section__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .workflow-visual-section__header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .workflow-visual-section__photo-frame {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
 .workflow-visual-section__title,
 .workflow-cards-section__title {
   font-family: var(--font-serif);
@@ -5972,22 +6024,6 @@ html {
   display: none;
 }
 
-.faq-item summary::after {
-  position: absolute;
-  top: 50%;
-  right: 6px;
-  color: var(--brand-emerald);
-  content: '+';
-  font-size: 22px;
-  font-weight: 400;
-  transform: translateY(-54%);
-  transition: transform 180ms ease;
-}
-
-.faq-item[open] summary::after {
-  transform: translateY(-54%) rotate(45deg);
-}
-
 .faq-item>p {
   max-width: 620px;
   padding: 0 36px 20px 0;
@@ -7209,20 +7245,12 @@ html {
   line-height: 1.1;
 }
 
-.dbs-turnaround-disclaimer,
-.dbs-turnaround-source {
+.dbs-turnaround-disclaimer {
   display: block;
   width: min(100%, 1120px);
   margin: 18px auto 0;
-}
-
-.dbs-turnaround-disclaimer {
   color: var(--mid-charcoal);
   font-size: 13px;
-}
-
-.dbs-turnaround-source {
-  font-weight: 650;
 }
 
 .check-guidance-section__intro {
@@ -8348,14 +8376,12 @@ html {
 
 .route-page__hero-detail summary,
 .route-page__section summary,
-.dbs-turnaround-details summary,
 .check-guidance-card__detail summary {
   cursor: pointer;
   list-style: none;
 }
 
 .route-page__hero-detail summary,
-.dbs-turnaround-details summary,
 .check-guidance-card__detail summary {
   width: fit-content;
   color: var(--brand-emerald);
@@ -8625,8 +8651,7 @@ html {
 
 /* ── Unified FAQ & Accordion System ── */
 .faq-page-item,
-.faq-item,
-.dbs-turnaround-details {
+.faq-item {
   display: block;
   border: 1px solid var(--border-grey);
   border-radius: var(--radius-medium);
@@ -8638,14 +8663,12 @@ html {
 }
 
 .faq-page-item:hover,
-.faq-item:hover,
-.dbs-turnaround-details:hover {
+.faq-item:hover {
   border-color: var(--pale-emerald);
 }
 
 .faq-page-item summary,
-.faq-item summary,
-.dbs-turnaround-details summary {
+.faq-item summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8660,8 +8683,7 @@ html {
 }
 
 .faq-page-item summary::-webkit-details-marker,
-.faq-item summary::-webkit-details-marker,
-.dbs-turnaround-details summary::-webkit-details-marker {
+.faq-item summary::-webkit-details-marker {
   display: none;
 }
 
@@ -8669,23 +8691,26 @@ html {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  min-width: 26px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
   flex: 0 0 auto;
   border-radius: 50%;
   background: var(--mint-white);
   color: var(--brand-emerald);
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
 }
 
+.faq-toggle svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
 .faq-page-item[open] .faq-toggle,
-.faq-item[open] .faq-toggle,
-.dbs-turnaround-details[open] .faq-toggle {
-  transform: rotate(45deg);
+.faq-item[open] .faq-toggle {
+  transform: rotate(180deg);
   background: var(--pale-emerald);
   color: var(--dark-emerald);
 }
@@ -8703,6 +8728,86 @@ html {
   color: var(--mid-charcoal);
   font-size: 13.5px;
   line-height: 1.65;
+}
+
+/* ── Compact Processing Times Accordion ── */
+.dbs-turnaround-source-wrap {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding-block: var(--space-2) var(--space-6);
+}
+
+.dbs-turnaround-source-wrap.section-pad {
+  padding-block: var(--space-2) var(--space-6);
+}
+
+.dbs-turnaround-details {
+  display: block;
+  width: min(100%, 420px);
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-medium);
+  background: var(--pure-white);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dbs-turnaround-details:hover {
+  border-color: var(--pale-emerald);
+}
+
+.dbs-turnaround-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 14px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--deep-charcoal);
+  list-style: none;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.dbs-turnaround-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.dbs-turnaround-details summary:hover {
+  color: var(--brand-emerald);
+}
+
+.dbs-turnaround-details .faq-toggle {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.dbs-turnaround-details[open] .faq-toggle {
+  transform: rotate(45deg);
+  background: var(--pale-emerald);
+  color: var(--dark-emerald);
+}
+
+.dbs-turnaround-details .faq-content {
+  padding: 0 14px 12px 14px;
+  color: var(--mid-charcoal);
+  font-size: 13px;
+  line-height: 1.55;
+  animation: accordion-slide-down 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dbs-turnaround-details .faq-content p {
+  margin: 0;
+  color: var(--mid-charcoal);
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .faq-content a {
@@ -10000,11 +10105,25 @@ html {
    Available for Phase 3 page work.
    ──────────────────────────────────────────────────────────────────────── */
 
-.route-page .ds-bg-white { background-color: var(--pure-white); }
-.route-page .ds-bg-soft { background-color: var(--soft-white); }
-.route-page .ds-bg-mint { background-color: var(--mint-white); }
-.route-page .ds-bg-tint { background-color: var(--surface-tint); }
-.route-page .ds-bg-accent { background-color: var(--accent-soft); }
+.route-page .ds-bg-white {
+  background-color: var(--pure-white);
+}
+
+.route-page .ds-bg-soft {
+  background-color: var(--soft-white);
+}
+
+.route-page .ds-bg-mint {
+  background-color: var(--mint-white);
+}
+
+.route-page .ds-bg-tint {
+  background-color: var(--surface-tint);
+}
+
+.route-page .ds-bg-accent {
+  background-color: var(--accent-soft);
+}
 
 /* ─── 2.8  Information Panel Foundations ──────────────────────────────────
    Reusable panel styles for callouts, notices, and sidebars.
@@ -10033,6 +10152,7 @@ html {
    ──────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 480px) {
+
   .employer-hero__pill,
   .individual-hero__trust-badge {
     width: 100%;
@@ -10157,9 +10277,17 @@ html {
   background: #CBD5E1;
 }
 
-.employer-hero__preview-dots span:nth-child(1) { background: #F87171; }
-.employer-hero__preview-dots span:nth-child(2) { background: #FBBF24; }
-.employer-hero__preview-dots span:nth-child(3) { background: #34D399; }
+.employer-hero__preview-dots span:nth-child(1) {
+  background: #F87171;
+}
+
+.employer-hero__preview-dots span:nth-child(2) {
+  background: #FBBF24;
+}
+
+.employer-hero__preview-dots span:nth-child(3) {
+  background: #34D399;
+}
 
 .employer-hero__preview-label {
   font-size: 11px;
@@ -10171,9 +10299,9 @@ html {
 .employer-hero__preview-img {
   width: 100%;
   height: auto;
-  max-height: 290px;
+  max-height: 320px;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
   display: block;
 }
 
@@ -10405,13 +10533,47 @@ html {
 
 /* Enhanced Individuals Hero */
 .individual-hero {
-  width: min(100% - (var(--page-gutter) * 2), var(--container-standard));
+  width: min(100% - (var(--page-gutter) * 2), var(--content-width));
   margin: 0 auto;
   padding: clamp(36px, 4.5vw, 56px) 0 clamp(24px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+  border-bottom: 2px solid var(--accent-soft);
+}
+
+.individual-hero__content {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  border-bottom: 2px solid var(--accent-soft);
+}
+
+.individual-hero__visual {
+  position: relative;
+  display: flex;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .individual-hero__visual:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(11, 92, 122, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.individual-hero__img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .individual-hero h1 {
@@ -10740,12 +10902,14 @@ html {
 /* ─── 3A.3  Responsive Adjustments (320px, 390px, 768px, 1024px) ───────── */
 
 @media (max-width: 1024px) {
-  .employer-hero {
+  .employer-hero,
+  .individual-hero {
     grid-template-columns: 1fr;
     gap: 32px;
   }
 
-  .employer-hero__preview {
+  .employer-hero__preview,
+  .individual-hero__visual {
     max-width: 580px;
   }
 
@@ -10764,6 +10928,7 @@ html {
 }
 
 @media (max-width: 768px) {
+
   .employer-levels__grid,
   .employer-tools__grid,
   .individual-ready-card__list,
@@ -10780,6 +10945,7 @@ html {
 }
 
 @media (max-width: 480px) {
+
   .employer-hero__pill,
   .individual-hero__trust-badge {
     width: 100%;
@@ -10788,6 +10954,7 @@ html {
 }
 
 @media (max-width: 390px) {
+
   .employer-hero,
   .individual-hero,
   .employer-levels-section,
