@@ -45,20 +45,6 @@ function Hero() {
           Move faster.<br />
           <span className="text-accent">Trust better.</span>
         </h1>
-
-        <p className="hero-description">
-          Fast, accredited UK DBS criminal record checks and digital identity verification for employers and individual applicants.
-        </p>
-
-        {/* ── CTA Buttons ── */}
-        <div className="hero-actions">
-          <a className="button button-primary" href="/apply">
-            Start my check <span aria-hidden="true">→</span>
-          </a>
-          <a className="button button-secondary" href="/employers">
-            For employers <span aria-hidden="true">→</span>
-          </a>
-        </div>
       </div>
 
       {/* ── Premium Zinc-Inspired Professional Photography ── */}
