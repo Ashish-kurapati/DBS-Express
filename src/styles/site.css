@@ -9283,7 +9283,7 @@ html {
   right: 0;
   top: 0;
   bottom: 0;
-  width: clamp(480px, 56vw, 880px);
+  width: clamp(520px, 58vw, 1160px);
   height: 100%;
   z-index: 1;
   pointer-events: none;

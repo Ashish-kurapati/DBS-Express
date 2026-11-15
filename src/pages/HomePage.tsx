@@ -45,10 +45,11 @@ function Hero() {
           src="/images/home-hero-handshake.png"
           alt=""
           className="hero-bg-img"
-          width="1536"
-          height="864"
+          width="2048"
+          height="1152"
           loading="eager"
           fetchPriority="high"
+          decoding="async"
         />
         <div className="hero-bg-fade" />
       </div>
