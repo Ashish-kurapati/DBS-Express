@@ -45,6 +45,16 @@ function Hero() {
           Move faster.<br />
           <span className="text-accent">Trust better.</span>
         </h1>
+
+        {/* ── CTA Buttons ── */}
+        <div className="hero-actions">
+          <a className="button button-primary" href="/apply">
+            Start my check <span aria-hidden="true">→</span>
+          </a>
+          <a className="button button-secondary" href="/employers">
+            For employers <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
 
       {/* ── Premium Zinc-Inspired Professional Photography ── */}

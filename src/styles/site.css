@@ -208,12 +208,10 @@
 
 .hero-actions {
   display: flex;
-  margin-top: 26px;
-  margin-top: 20px;
+  margin-top: clamp(20px, 2.5vw, 28px);
   align-items: center;
   flex-wrap: wrap;
   gap: 14px;
-  gap: 12px;
 }
 
 .button {
