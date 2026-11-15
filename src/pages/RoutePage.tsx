@@ -1060,15 +1060,35 @@ function OfflinePage() {
 }
 
 function TeamPage() {
-  return <RouteLayout pageClassName="route-page--how-we-work">
-    <PageHero eyebrow="HOW WE WORK" title="How we work" description="Understand check eligibility, choose an application route, and contact support when you need help." />
-    <div className="how-we-work-grid section-pad">
-      <article><span aria-hidden="true">01</span><h2>Start with eligibility</h2><p>Check the role against official DBS guidance before choosing a check level.</p><a href={dbsEligibilityUrl} target="_blank" rel="noreferrer">Read GOV.UK guidance <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
-      <article><span aria-hidden="true">02</span><h2>Choose your route</h2><p>Individuals and employers use separate application routes on this website.</p><a href="/apply">Choose an application route <span aria-hidden="true">→</span></a></article>
-      <article><span aria-hidden="true">03</span><h2>Ask for support</h2><p>Contact the DBS-Express team for questions about site information and employer access.</p><a href="/contact">Contact support <span aria-hidden="true">→</span></a></article>
-      <article><span aria-hidden="true">04</span><h2>DBS service targets</h2><p>Published processing targets are not guarantees. DBS controls processing and extra checks can take longer.</p><a href={dbsPerformanceUrl} target="_blank" rel="noreferrer">DBS performance and annual report <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
-    </div>
-  </RouteLayout>
+  return (
+    <RouteLayout pageClassName="route-page--how-we-work">
+      <header className="how-we-work-hero">
+        <div className="how-we-work-hero__content">
+          <p className="eyebrow"><span /> HOW WE WORK</p>
+          <h1>How we work</h1>
+          <p className="how-we-work-hero__desc">
+            Understand check eligibility, choose an application route, and contact support when you need help.
+          </p>
+        </div>
+        <div className="how-we-work-hero__visual" aria-label="DBS-Express background screening and compliance specialists">
+          <img
+            src="/assets/workflow-team.jpg"
+            alt="DBS-Express background screening and compliance specialists"
+            className="how-we-work-hero__img"
+            width="520"
+            height="487"
+            loading="eager"
+          />
+        </div>
+      </header>
+      <div className="how-we-work-grid section-pad">
+        <article><span aria-hidden="true">01</span><h2>Start with eligibility</h2><p>Check the role against official DBS guidance before choosing a check level.</p><a href={dbsEligibilityUrl} target="_blank" rel="noreferrer">Read GOV.UK guidance <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
+        <article><span aria-hidden="true">02</span><h2>Choose your route</h2><p>Individuals and employers use separate application routes on this website.</p><a href="/apply">Choose an application route <span aria-hidden="true">→</span></a></article>
+        <article><span aria-hidden="true">03</span><h2>Ask for support</h2><p>Contact the DBS-Express team for questions about site information and employer access.</p><a href="/contact">Contact support <span aria-hidden="true">→</span></a></article>
+        <article><span aria-hidden="true">04</span><h2>DBS service targets</h2><p>Published processing targets are not guarantees. DBS controls processing and extra checks can take longer.</p><a href={dbsPerformanceUrl} target="_blank" rel="noreferrer">DBS performance and annual report <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a></article>
+      </div>
+    </RouteLayout>
+  )
 }
 
 function SelfEmployedPage() {
@@ -1145,6 +1165,7 @@ export function RoutePage({ pathname }: { pathname: string }) {
       '/maintenance': 'System status',
       '/offline': 'Offline help',
       '/team': 'How we work',
+      '/how-we-work': 'How we work',
       '/policies': 'Company policies',
       '/privacy-policy': 'Privacy policy',
       '/cookie-policy': 'Cookie policy',
@@ -1166,7 +1187,7 @@ export function RoutePage({ pathname }: { pathname: string }) {
   if (pathname === '/contact') return <ContactPage />
   if (pathname === '/maintenance') return <MaintenancePage />
   if (pathname === '/offline') return <OfflinePage />
-  if (pathname === '/team') return <TeamPage />
+  if (pathname === '/team' || pathname === '/how-we-work') return <TeamPage />
   if (pathname === '/policies') return <PoliciesPage />
   if (pathname === '/privacy-policy') return <PrivacyPage />
   if (pathname === '/cookie-policy') return <CookiePolicyPage />

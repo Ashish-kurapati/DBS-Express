@@ -3836,58 +3836,6 @@ input:focus-visible {
   margin: 0 0 clamp(20px, 2.6vw, 28px);
 }
 
-.workflow-visual-section__header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: clamp(24px, 3vw, 40px);
-  margin-bottom: clamp(24px, 3.2vw, 36px);
-}
-
-.workflow-visual-section__header-row .workflow-visual-section__header {
-  margin-bottom: 0;
-}
-
-.workflow-visual-section__photo-frame {
-  flex-shrink: 0;
-  width: clamp(200px, 22vw, 290px);
-  aspect-ratio: 16 / 11;
-  border-radius: var(--radius-medium, 10px);
-  overflow: hidden;
-  border: 1px solid var(--border-grey);
-  box-shadow: 0 4px 18px rgb(29 35 42 / 6%);
-  background: var(--pure-white);
-  transition: transform 240ms ease, box-shadow 240ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .workflow-visual-section__photo-frame:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgb(29 35 42 / 10%);
-  }
-}
-
-.workflow-visual-section__photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  display: block;
-}
-
-@media (max-width: 767px) {
-  .workflow-visual-section__header-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  .workflow-visual-section__photo-frame {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
 .workflow-visual-section__title,
 .workflow-cards-section__title {
   font-family: var(--font-serif);
@@ -7160,6 +7108,81 @@ html {
   padding-left: 20px;
   gap: 6px;
   color: var(--mid-charcoal);
+}
+
+/* How We Work Hero */
+.how-we-work-hero {
+  width: min(100% - (var(--page-gutter) * 2), var(--content-width));
+  margin: 0 auto;
+  padding: clamp(36px, 4.5vw, 56px) 0 clamp(24px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+  border-bottom: 2px solid var(--accent-soft);
+}
+
+.how-we-work-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.how-we-work-hero h1 {
+  font-size: clamp(22px, 5.5vw, 36px);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  color: var(--color-text-primary);
+  margin: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.how-we-work-hero__desc {
+  font-size: clamp(14px, 1.2vw, 15.5px);
+  line-height: var(--leading-relaxed);
+  color: var(--mid-charcoal);
+  margin: 0;
+  max-width: 600px;
+}
+
+.how-we-work-hero__visual {
+  position: relative;
+  display: flex;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .how-we-work-hero__visual:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(15, 118, 110, 0.14), 0 4px 10px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.how-we-work-hero__img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .how-we-work-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .how-we-work-hero__visual {
+    max-width: 540px;
+  }
 }
 
 .individual-journey-steps,

@@ -5,26 +5,14 @@ export function WorkflowSection() {
       id="workflow"
       aria-labelledby="workflow-title"
     >
-        <div className="workflow-visual-section__header-row">
-          <div className="workflow-visual-section__header">
-            <h2 id="workflow-title" className="workflow-visual-section__title">
-              How it works
-            </h2>
-            <p className="workflow-visual-section__subtitle">
-              Three simple steps. One straightforward process.
-            </p>
-          </div>
-          <div className="workflow-visual-section__photo-frame" aria-hidden="true">
-            <img
-              src="/assets/workflow-team.jpg"
-              alt="DBS-Express compliance specialists"
-              className="workflow-visual-section__photo"
-              width="290"
-              height="199"
-              loading="lazy"
-            />
-          </div>
-        </div>
+      <div className="workflow-visual-section__header">
+        <h2 id="workflow-title" className="workflow-visual-section__title">
+          How it works
+        </h2>
+        <p className="workflow-visual-section__subtitle">
+          Three simple steps. One straightforward process.
+        </p>
+      </div>
 
         <div className="workflow-visual-grid">
           {/* CARD 01 */}
