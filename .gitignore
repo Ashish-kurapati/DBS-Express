@@ -26,3 +26,6 @@ dist-ssr
 # Media & Videos
 *.mp4
 *.webm
+
+# Temporary screenshots
+screenshot_tests/

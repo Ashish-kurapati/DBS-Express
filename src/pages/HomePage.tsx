@@ -38,11 +38,26 @@ const checkDetails = [
 
 function Hero() {
   return (
-    <section className="hero-section" aria-labelledby="hero-title">
+    <section className="hero-section hero-section--fullbleed" aria-labelledby="hero-title">
+      {/* ── Full-bleed handshake photograph – right side, fades left ── */}
+      <div className="hero-bg-photo" aria-hidden="true">
+        <img
+          src="/images/home-hero-handshake.png"
+          alt=""
+          className="hero-bg-img"
+          width="1536"
+          height="864"
+          loading="eager"
+          fetchPriority="high"
+        />
+        <div className="hero-bg-fade" />
+      </div>
+
+      {/* ── Text copy + CTA ── */}
       <div className="hero-copy reveal-on-scroll">
         <h1 id="hero-title" className="hero-quote-headline">
           Verify smarter.<br />
-          Move faster.<br />
+          Move fast.<br />
           <span className="text-accent">Trust better.</span>
         </h1>
 
@@ -57,38 +72,8 @@ function Hero() {
         </div>
       </div>
 
-      {/* ── Premium Zinc-Inspired Professional Photography ── */}
-      <div className="hero-visual-wrap reveal-on-scroll" aria-label="Approachable professional in modern UK office">
-        <div className="hero-geometric-shape" aria-hidden="true">
-          <svg
-            viewBox="0 0 520 520"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="hero-geometric-svg"
-          >
-            <path
-              d="M 107.1 124.6 Q 110.0 110.0 123.7 104.2 L 284.8 36.4 Q 300.0 30.0 313.0 40.2 L 477.3 170.0 Q 490.0 180.0 487.6 196.0 L 452.9 430.1 Q 450.0 450.0 430.3 453.6 L 242.2 487.8 Q 230.0 490.0 220.2 482.5 L 73.9 370.6 Q 60.0 360.0 63.4 342.9 Z"
-              fill="url(#hero-emerald-grad)"
-            />
-            <defs>
-              <linearGradient id="hero-emerald-grad" x1="15%" y1="0%" x2="85%" y2="100%">
-                <stop offset="0%" stopColor="#CCEBE0" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#A8DEC9" stopOpacity="0.75" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div className="hero-photo-frame">
-          <img
-            src="/assets/hero-professional.jpg"
-            alt="Approachable professional in a modern UK business environment"
-            className="hero-photo-img"
-            width="500"
-            height="500"
-            loading="eager"
-          />
-        </div>
-      </div>
+      {/* ── Spacer – keeps grid balanced on wide screens ── */}
+      <div className="hero-visual-spacer" aria-hidden="true" />
     </section>
   )
 }
