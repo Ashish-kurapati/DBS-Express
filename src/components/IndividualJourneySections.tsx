@@ -43,14 +43,19 @@ export function IndividualJourneySections() {
       <DBSStatsSection />
 
       <div className="dbs-turnaround-source-wrap section-pad">
-        <details className="dbs-turnaround-details" name="page-details">
-          <summary>More about processing times</summary>
-          <p>DBS controls processing. Some applications need additional checks or police enquiries.</p>
-        </details>
-        <a className="dbs-turnaround-source" href={dbsPerformanceUrl} target="_blank" rel="noreferrer">
-          DBS performance and annual report <span aria-hidden="true">↗</span>
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>
+          <details className="dbs-turnaround-details">
+            <summary>
+              <span>More about processing times</span>
+              <span className="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div className="faq-content">
+              <p>DBS controls processing. Some applications need additional checks or police enquiries.</p>
+            </div>
+          </details>
+          <a className="dbs-turnaround-source" href={dbsPerformanceUrl} target="_blank" rel="noreferrer">
+            DBS performance and annual report <span aria-hidden="true">↗</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
       </div>
     </>
   )

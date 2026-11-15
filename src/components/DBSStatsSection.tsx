@@ -133,28 +133,30 @@ function DBSCard({ card, index }: { card: (typeof cards)[0]; index: number }) {
         <span className="dbs-stat-card__label">{card.label}</span>
       </div>
 
-      <div className="dbs-stat-card__visual">
-        <Illustration />
-      </div>
+      <div className="dbs-stat-card__panel">
+        <div className="dbs-stat-card__visual">
+          <Illustration />
+        </div>
 
-      <div className="dbs-stat-card__stat-block">
-        <span className="dbs-stat-card__stat" aria-label={`${card.stat} of applications complete`}>
-          {card.stat}
-        </span>
-        <span className="dbs-stat-card__turnaround">{card.turnaround}</span>
-      </div>
+        <div className="dbs-stat-card__stat-block">
+          <span className="dbs-stat-card__stat" aria-label={`${card.stat} of applications complete`}>
+            {card.stat}
+          </span>
+          <span className="dbs-stat-card__turnaround">{card.turnaround}</span>
+        </div>
 
-      <div className="dbs-stat-card__body">
-        <p className="dbs-stat-card__scope">{card.scope}</p>
-        <p className="dbs-stat-card__note">{card.note}</p>
-      </div>
+        <div className="dbs-stat-card__body">
+          <p className="dbs-stat-card__scope">{card.scope}</p>
+          <p className="dbs-stat-card__note">{card.note}</p>
+        </div>
 
-      <a href={card.href} className="dbs-stat-card__action" aria-label={`${card.label} — ${card.linkLabel}`}>
-        <span>{card.linkLabel}</span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="dbs-stat-card__arrow">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </a>
+        <a href={card.href} className="dbs-stat-card__action" aria-label={`${card.label} — ${card.linkLabel}`}>
+          <span>{card.linkLabel}</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" className="dbs-stat-card__arrow">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      </div>
     </article>
   )
 }

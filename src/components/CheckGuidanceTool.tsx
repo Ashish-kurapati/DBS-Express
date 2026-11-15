@@ -177,13 +177,7 @@ export function CheckGuidanceTool() {
           <div className="check-guidance-card__body" aria-live="polite">
             <p className="check-guidance-card__progress">Possible result</p>
             <h3>{result.title}</h3>
-            <p>{result.description.split(/\s+/).slice(0, 16).join(' ')}</p>
-            {result.description.split(/\s+/).length > 16 && (
-              <details className="check-guidance-card__detail" name="page-details">
-                <summary>Read more</summary>
-                <p>{result.description.split(/\s+/).slice(16).join(' ')}</p>
-              </details>
-            )}
+            <p className="check-guidance-card__desc">{result.description}</p>
             <p className="check-guidance-card__disclaimer">This tool provides guidance, not a definitive eligibility decision. The actual role and applicable legislation determine eligibility.</p>
             <div className="check-guidance-card__links">
               <a className="button button-primary" href={resultHref} target={resultHref.startsWith('https://') ? '_blank' : undefined} rel={resultHref.startsWith('https://') ? 'noreferrer' : undefined}>

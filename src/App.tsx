@@ -59,7 +59,7 @@ function App() {
           window.history.pushState(null, '', href)
           setPathname(getPathname())
         }
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo(0, 0)
       }
     }
 

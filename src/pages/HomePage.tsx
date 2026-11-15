@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { dbsPerformanceUrl, pricingTiers } from '../data/siteContent'
+import { dbsPerformanceUrl } from '../data/siteContent'
 import { SiteFooter } from '../components/SiteFooter'
 import { SiteHeader } from '../components/SiteHeader'
 import { WorkflowSection } from '../components/WorkflowSection'
@@ -9,7 +9,6 @@ import { useScrollRevealContainer } from '../hooks/useScrollReveal'
 import { FloatingStartButton } from '../components/FloatingStartButton'
 
 const checkTypes = ['Basic DBS check', 'Standard DBS check', 'Enhanced DBS check']
-const startingPrices = pricingTiers[pricingTiers.length - 1]
 
 const checkDetails = [
   {
@@ -42,63 +41,24 @@ function Hero() {
   return (
     <section className="hero-section" aria-labelledby="hero-title">
       <div className="hero-copy reveal-on-scroll">
-        <p className="eyebrow"><span /> DBS CHECKS &amp; CLEARANCE</p>
-        <h1 id="hero-title">
-          DBS checks, <span className="text-accent">done fast.</span>
-        </h1>
-        <p className="hero-tagline">Verify smarter. Move faster. Trust better.</p>
-        <p className="hero-description">
-          Simple online DBS checks for individuals and organisations. Choose the right check, apply securely and follow your application.
-        </p>
-
-        {/* ── 3 Icon-led Benefits ── */}
-        <ul className="hero-benefits" aria-label="Key service benefits">
-          <li className="hero-benefit-item" style={{ '--benefit-delay': '100ms' } as React.CSSProperties}>
-            <span className="hero-benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="10" cy="10" r="7" />
-                <polyline points="10 6 10 10 13 12" />
-              </svg>
-            </span>
-            <span>Most Basic checks back in 2 days</span>
-          </li>
-          <li className="hero-benefit-item" style={{ '--benefit-delay': '200ms' } as React.CSSProperties}>
-            <span className="hero-benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="14" height="12" rx="2" />
-                <polyline points="7 10 9 12 13 8" />
-              </svg>
-            </span>
-            <span>Track your check online</span>
-          </li>
-          <li className="hero-benefit-item" style={{ '--benefit-delay': '300ms' } as React.CSSProperties}>
-            <span className="hero-benefit-icon" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h3l1.5 3-2 1.5a10 10 0 0 0 4 4L12 11.5l3 1.5v3c0 .6-.4 1-1 1A14 14 0 0 1 3 5c0-.6.4-1 1-1z" />
-              </svg>
-            </span>
-            <span>Real people on the phone, 9–5</span>
-          </li>
-        </ul>
-        <p className="hero-turnaround-note">Turnaround times are service targets, not guarantees.</p>
-
-        {/* ── Hero pricing ── */}
-        <div className="hero-pricing" aria-label="Starting prices">
-          <div className="hero-pricing__row">
-            <div className="hero-pricing__item">
-              <span className="hero-pricing__label">Basic checks from</span>
-              <span className="hero-pricing__amount">{startingPrices.basicStandard}</span>
-            </div>
-            <div className="hero-pricing__divider" aria-hidden="true" />
-            <div className="hero-pricing__item">
-              <span className="hero-pricing__label">Enhanced checks from</span>
-              <span className="hero-pricing__amount">{startingPrices.enhanced}</span>
-            </div>
+        <div className="hero-rating-badge">
+          <div className="hero-rating-stars" aria-hidden="true">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
-          <p className="hero-pricing__note">All-in pricing. No hidden fees.</p>
+          <span className="hero-rating-text">Official Registered Umbrella Body · Fast-Track Verification</span>
         </div>
 
-        {/* ── Updated CTA Buttons: Start my check (Green) & For employers (White) ── */}
+        <h1 id="hero-title" className="hero-quote-headline">
+          Verify smarter.<br />
+          Move faster.<br />
+          <span className="text-accent">Trust better.</span>
+        </h1>
+
+        <p className="hero-description">
+          Fast, accredited UK DBS criminal record checks and digital identity verification for employers and individual applicants.
+        </p>
+
+        {/* ── CTA Buttons ── */}
         <div className="hero-actions">
           <a className="button button-primary" href="/apply">
             Start my check <span aria-hidden="true">→</span>
@@ -109,15 +69,34 @@ function Hero() {
         </div>
       </div>
 
-      {/* ── Authentic DBS Application & Dashboard Screenshot ── */}
-      <div className="hero-media-preview reveal-on-scroll" aria-label="DBS Express application dashboard preview">
-        <div className="hero-media-frame">
+      {/* ── Premium Zinc-Inspired Professional Photography ── */}
+      <div className="hero-visual-wrap reveal-on-scroll" aria-label="Approachable professional in modern UK office">
+        <div className="hero-geometric-shape" aria-hidden="true">
+          <svg
+            viewBox="0 0 520 520"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="hero-geometric-svg"
+          >
+            <path
+              d="M 107.1 124.6 Q 110.0 110.0 123.7 104.2 L 284.8 36.4 Q 300.0 30.0 313.0 40.2 L 477.3 170.0 Q 490.0 180.0 487.6 196.0 L 452.9 430.1 Q 450.0 450.0 430.3 453.6 L 242.2 487.8 Q 230.0 490.0 220.2 482.5 L 73.9 370.6 Q 60.0 360.0 63.4 342.9 Z"
+              fill="url(#hero-emerald-grad)"
+            />
+            <defs>
+              <linearGradient id="hero-emerald-grad" x1="15%" y1="0%" x2="85%" y2="100%">
+                <stop offset="0%" stopColor="#CCEBE0" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#A8DEC9" stopOpacity="0.75" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div className="hero-photo-frame">
           <img
-            src="/assets/candidate-dashboard.jpg"
-            alt="DBS Express applicant compliance and tracking dashboard"
-            className="hero-media-img"
-            width="800"
-            height="520"
+            src="/assets/hero-professional.jpg"
+            alt="Approachable professional in a modern UK business environment"
+            className="hero-photo-img"
+            width="500"
+            height="500"
             loading="eager"
           />
         </div>
@@ -170,22 +149,48 @@ function CheckTypesSection() {
 
 function PricingSection() {
   return (
-    <section className="pricing-overview section-pad reveal-on-scroll" id="pricing" aria-labelledby="pricing-title">
-      <div className="pricing-overview__copy">
+    <section className="pricing-section section-pad reveal-on-scroll" id="pricing" aria-labelledby="pricing-title">
+      <div className="pricing-section__header">
         <p className="eyebrow"><span /> PRICING</p>
         <h2 id="pricing-title">See your check price.</h2>
-        <p>All-in totals include government, administration, and Digital ID fees.</p>
-        <p className="pricing-overview__price">
-          Basic <strong>{startingPrices.basicStandard}</strong> · Enhanced{' '}
-          <strong>{startingPrices.enhanced}</strong>
-        </p>
-        <p className="pricing-overview__price-note">
-          From prices apply to 500–1,499 checks yearly. Digital ID included.
-        </p>
+        <p className="pricing-section__subtitle">All-in totals include government, administration, and Digital ID fees.</p>
       </div>
-      <a className="button button-primary" href="/pricing">
-        View current pricing <span aria-hidden="true">↗</span>
-      </a>
+
+      <div className="pricing-cards-grid">
+        {/* Card 1: Basic Checks */}
+        <article className="pricing-card">
+          <div className="pricing-card__badge-wrap">
+            <span className="pricing-card__badge">BASIC CHECKS</span>
+          </div>
+          <div className="pricing-card__price">
+            <span className="pricing-card__from">from</span>
+            <strong className="pricing-card__amount">£42.00</strong>
+          </div>
+          <p className="pricing-card__desc">
+            Statutory disclosure for any job role or personal reference. Covers unspent convictions.
+          </p>
+          <a className="button button-primary pricing-card__btn" href="/pricing">
+            View pricing <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        {/* Card 2: Enhanced */}
+        <article className="pricing-card">
+          <div className="pricing-card__badge-wrap">
+            <span className="pricing-card__badge">ENHANCED</span>
+          </div>
+          <div className="pricing-card__price">
+            <span className="pricing-card__from">from</span>
+            <strong className="pricing-card__amount">£73.00</strong>
+          </div>
+          <p className="pricing-card__desc">
+            For eligible roles in healthcare, education, and regulated activity with vulnerable groups.
+          </p>
+          <a className="button button-primary pricing-card__btn" href="/pricing">
+            View pricing <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      </div>
     </section>
   )
 }
@@ -199,125 +204,150 @@ function FaqSection() {
         <p>Short answers about check levels, applications, and eligibility.</p>
       </div>
       <div className="faq-list">
-        <details className="faq-item" name="page-details">
-          <summary>How do DBS check levels differ?</summary>
-          <p>
-            Each level can show different information, and Standard and Enhanced checks are only
-            available for roles that meet legal eligibility requirements.{' '}
-            <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about" target="_blank" rel="noreferrer">
-              Read the DBS guidance <span aria-hidden="true">↗</span>
-            </a>
-          </p>
-        </details>
-        <details className="faq-item" name="page-details">
-          <summary>Can I apply for Basic?</summary>
-          <p>
-            Yes. A person can apply for a Basic check directly; an employer can also apply with the
-            applicant’s consent.{' '}
-            <a href="/apply/individual">
-              Apply for a Basic check <span aria-hidden="true">↗</span>
-            </a>
-          </p>
-        </details>
-        <details className="faq-item" name="page-details">
-          <summary>Who can request higher-level checks?</summary>
-          <p>
-            No. These checks are limited to roles that meet the legal eligibility criteria. The
-            recruiting organisation should confirm the correct level for the role.
-          </p>
-        </details>
-        <details className="faq-item" name="page-details">
-          <summary>Where can I get application help?</summary>
-          <p>
-            Contact the DBS-Express team for support with choosing a check or completing an
-            application.{' '}
-            <a href="/contact">
-              Contact DBS-Express <span aria-hidden="true">↗</span>
-            </a>
-          </p>
-        </details>
-      </div>
-    </section>
-  )
+          <details className="faq-item">
+            <summary>
+              <span>How do DBS check levels differ?</span>
+              <span className="faq-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div className="faq-content">
+              <p>
+                Each level can show different information, and Standard and Enhanced checks are only
+                available for roles that meet legal eligibility requirements.{' '}
+                <a href="https://www.gov.uk/government/organisations/disclosure-and-barring-service/about" target="_blank" rel="noreferrer">
+                  Read the DBS guidance <span aria-hidden="true">↗</span>
+                </a>
+              </p>
+            </div>
+          </details>
+            <details className="faq-item">
+              <summary>
+                <span>Can I apply for Basic?</span>
+                <span className="faq-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div className="faq-content">
+                <p>
+                  Yes. A person can apply for a Basic check directly; an employer can also apply with the
+                  applicant’s consent.{' '}
+                  <a href="/apply/individual">
+                    Apply for a Basic check <span aria-hidden="true">↗</span>
+                  </a>
+                </p>
+              </div>
+            </details>
+              <details className="faq-item">
+                <summary>
+                  <span>Who can request higher-level checks?</span>
+                  <span className="faq-toggle" aria-hidden="true">+</span>
+                </summary>
+                <div className="faq-content">
+                  <p>
+                    No. These checks are limited to roles that meet the legal eligibility criteria. The
+                    recruiting organisation should confirm the correct level for the role.
+                  </p>
+                </div>
+              </details>
+                <details className="faq-item">
+                  <summary>
+                    <span>Where can I get application help?</span>
+                    <span className="faq-toggle" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="faq-content">
+                    <p>
+                      Contact the DBS-Express team for support with choosing a check or completing an
+                      application.{' '}
+                      <a href="/contact">
+                        Contact DBS-Express <span aria-hidden="true">↗</span>
+                      </a>
+                    </p>
+                  </div>
+                </details>
+              </div>
+            </section>
+            )
 }
 
-function NextStepsSection() {
+            function NextStepsSection() {
   return (
-    <section className="next-steps-section section-pad reveal-on-scroll" id="contact" aria-labelledby="next-steps-title">
-      <div>
-        <p className="eyebrow"><span /> CONTACT &amp; SUPPORT</p>
-        <h2 id="next-steps-title">Have questions or need help?</h2>
-        <p className="next-steps-copy">
-          Speak with our UK team directly on <strong>01254 432655</strong> (9am–5pm, Mon–Fri) or email <strong>contact@dbs-express.co.uk</strong>.
-        </p>
-      </div>
-      <div className="next-steps-actions">
-        <a className="button button-primary" href="/contact">
-          Contact support <span aria-hidden="true">→</span>
-        </a>
-        <a className="button button-secondary" href="/apply">
-          Start an application <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </section>
-  )
+            <section className="next-steps-section section-pad reveal-on-scroll" id="contact" aria-labelledby="next-steps-title">
+              <div>
+                <p className="eyebrow"><span /> CONTACT &amp; SUPPORT</p>
+                <h2 id="next-steps-title">Have questions or need help?</h2>
+                <p className="next-steps-copy">
+                  Speak with our UK team directly on <strong>01254 432655</strong> (9am–5pm, Mon–Fri) or email <strong>contact@dbs-express.co.uk</strong>.
+                </p>
+              </div>
+              <div className="next-steps-actions">
+                <a className="button button-primary" href="/contact">
+                  Contact support <span aria-hidden="true">→</span>
+                </a>
+                <a className="button button-secondary" href="/apply">
+                  Start an application <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </section>
+            )
 }
 
-export function HomePage() {
+            export function HomePage() {
   const mainRef = useScrollRevealContainer<HTMLElement>()
 
   useEffect(() => {
     const handleHash = () => {
       const rawHash = window.location.hash.replace(/^#/, '').toLowerCase()
-      if (!rawHash) return
-      const targetId =
-        rawHash === 'dbs-checks'
-          ? 'services'
-          : rawHash === 'how-it-works'
-            ? 'workflow'
-            : rawHash === 'faqs'
+              if (!rawHash) return
+              const targetId =
+              rawHash === 'dbs-checks'
+              ? 'services'
+              : rawHash === 'how-it-works'
+              ? 'workflow'
+              : rawHash === 'faqs'
               ? 'faq'
               : rawHash
 
-      const el = document.getElementById(targetId) || document.getElementById(rawHash)
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth' })
-        }, 80)
-      }
+              const el = document.getElementById(targetId) || document.getElementById(rawHash)
+              if (el) {
+                setTimeout(() => {
+                  el.scrollIntoView({ behavior: 'smooth' })
+                }, 80)
+              }
     }
 
-    handleHash()
-    window.addEventListener('hashchange', handleHash)
+              handleHash()
+              window.addEventListener('hashchange', handleHash)
     return () => window.removeEventListener('hashchange', handleHash)
   }, [])
 
-  return (
-    <div className="site-shell">
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <SiteHeader />
-      <main id="main-content" ref={mainRef}>
-        <Hero />
-        <CheckTypesSection />
-        <WorkflowSection />
-        <DBSStatsSection />
-        <div className="dbs-turnaround-source-wrap section-pad">
-          <details className="dbs-turnaround-details" name="page-details">
-            <summary>More about processing times</summary>
-            <p>DBS controls processing. Some applications need additional checks or police enquiries.</p>
-          </details>
-          <a className="dbs-turnaround-source" href={dbsPerformanceUrl} target="_blank" rel="noreferrer">
-            DBS performance and annual report <span aria-hidden="true">↗</span>
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        </div>
-        <IntegrationsSection />
-        <PricingSection />
-        <FaqSection />
-        <NextStepsSection />
-      </main>
-      <SiteFooter />
-      <FloatingStartButton />
-    </div>
-  )
+              return (
+              <div className="site-shell">
+                <a className="skip-link" href="#main-content">Skip to content</a>
+                <SiteHeader />
+                <main id="main-content" ref={mainRef}>
+                  <Hero />
+                  <CheckTypesSection />
+                  <WorkflowSection />
+                  <DBSStatsSection />
+                  <div className="dbs-turnaround-source-wrap section-pad">
+                      <details className="dbs-turnaround-details">
+                        <summary>
+                          <span>More about processing times</span>
+                          <span className="faq-toggle" aria-hidden="true">+</span>
+                        </summary>
+                        <div className="faq-content">
+                          <p>DBS controls processing. Some applications need additional checks or police enquiries.</p>
+                        </div>
+                      </details>
+                      <a className="dbs-turnaround-source" href={dbsPerformanceUrl} target="_blank" rel="noreferrer">
+                        DBS performance and annual report <span aria-hidden="true">↗</span>
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                  </div>
+                  <IntegrationsSection />
+                  <PricingSection />
+                  <FaqSection />
+                  <NextStepsSection />
+                </main>
+                <SiteFooter />
+                <FloatingStartButton />
+              </div>
+              )
 }
