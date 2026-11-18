@@ -6614,6 +6614,7 @@ html {
   }
 }
 
+.site-header.site-header--animated,
 .site-header--animated {
   --deep-charcoal: #1D232A;
   --mid-charcoal: #3F4552;
@@ -6625,10 +6626,17 @@ html {
   --pure-white: #FFFFFF;
   --mint-white: #EEF7F3;
   --dock-gold: #037554;
-  position: relative;
-  z-index: 50;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: var(--deep-charcoal);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: none !important;
+  border: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  padding: 16px 0 10px;
+  pointer-events: none;
 }
 
 .site-header__dock .animated-top-dock-component.atd-modern.dbs-top-dock {
@@ -6637,7 +6645,7 @@ html {
   min-height: 0;
   overflow: visible;
   color: #FFFFFF;
-  background: transparent;
+  background: transparent !important;
 }
 
 .site-header__dock .atd-modern__aurora {
@@ -6649,28 +6657,33 @@ html {
   top: 0;
   left: 0;
   transform: none;
-  width: 100%;
-  max-width: 100%;
+  width: clamp(840px, 80%, 1280px);
+  max-width: calc(100% - 32px);
+  margin-inline: auto;
   min-height: 72px;
-  height: 72px;
-  border-radius: 0;
-  border: none;
-  gap: clamp(12px, 2vw, 32px);
-  padding: 0 clamp(16px, 3.5vw, 48px);
-  background: var(--deep-charcoal);
-  box-shadow: none;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  height: 74px;
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(43, 51, 60, 0.86), rgba(29, 35, 42, 0.82));
+  box-shadow:
+    0 20px 48px -18px rgba(0, 0, 0, 0.65),
+    0 8px 24px -10px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  gap: clamp(12px, 1.8vw, 28px);
+  padding: 6px 14px 6px 22px;
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  pointer-events: auto;
 }
 
 .site-header__dock .atd-modern__dock {
   margin-inline: auto;
-  gap: clamp(2px, 0.35vw, 6px);
+  gap: clamp(2px, 0.3vw, 6px);
 }
 
 .site-header__dock .atd-modern__brand {
@@ -6945,19 +6958,21 @@ html {
   white-space: nowrap;
 }
 
-@media (max-width: 1260px) and (min-width: 921px) {
+@media (max-width: 1240px) and (min-width: 921px) {
   .site-header__dock .atd-modern__bar {
-    padding: 0 16px;
-    gap: 10px;
+    width: min(95%, 1180px);
+    max-width: calc(100% - 24px);
+    padding: 5px 10px 5px 16px;
+    gap: 8px;
   }
 
   .site-header__dock .atd-modern__dock {
-    gap: 3px;
+    gap: 2px;
   }
 
   .site-header__dock .atd-modern__item {
-    padding: 0 8px;
-    gap: 5px;
+    padding: 0 7px;
+    gap: 4px;
   }
 
   .site-header__dock .atd-modern__item>span:last-child {
@@ -6975,6 +6990,11 @@ html {
 }
 
 @media (max-width: 920px) {
+  .site-header.site-header--animated,
+  .site-header--animated {
+    padding: 10px 0 6px;
+  }
+
   .site-header__dock .animated-top-dock-component.atd-modern.dbs-top-dock {
     position: relative;
     height: auto;
@@ -6985,16 +7005,27 @@ html {
     position: relative;
     left: 0;
     top: 0;
-    width: 100%;
-    min-height: 64px;
-    height: 64px;
+    width: calc(100% - 24px);
+    max-width: 600px;
+    min-height: 60px;
+    height: 62px;
     gap: 10px;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    padding: 0 16px;
+    margin: 0 auto;
+    padding: 4px 12px 4px 18px;
+    border-radius: 31px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(180deg, rgba(43, 51, 60, 0.90), rgba(29, 35, 42, 0.86));
+    box-shadow:
+      0 14px 36px -12px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
     transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     box-sizing: border-box;
+    pointer-events: auto;
   }
 
   .site-header__dock .atd-modern__brand {
@@ -7015,23 +7046,29 @@ html {
 
   .site-header__dock .atd-modern__menu-toggle {
     display: inline-flex;
-    min-height: 42px;
-    padding: 0 12px;
+    min-height: 40px;
+    padding: 0 14px;
     align-items: center;
     gap: 9px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius-small);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 20px;
     color: #FFFFFF;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.08);
     font: inherit;
     font-size: 14px;
     font-weight: 650;
     cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease;
+  }
+
+  .site-header__dock .atd-modern__menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.35);
   }
 
   .site-header__dock .atd-modern__menu-toggle:focus-visible,
   .site-header__dock .atd-modern__mobile-menu a:focus-visible {
-    outline: 2px solid var(--pale-emerald);
+    outline: 2px solid var(--brand-emerald);
     outline-offset: 3px;
   }
 
@@ -7050,18 +7087,19 @@ html {
 
   .site-header__dock .atd-modern__mobile-menu:not([hidden]) {
     display: grid;
-    width: 100%;
-    gap: 2px;
-    margin: 0;
-    padding: 10px 16px 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
-    background: var(--deep-charcoal);
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+    width: calc(100% - 24px);
+    max-width: 600px;
+    gap: 4px;
+    margin: 8px auto 14px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(43, 51, 60, 0.94), rgba(29, 35, 42, 0.92));
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
     box-sizing: border-box;
+    pointer-events: auto;
   }
 
   .site-header__dock .atd-modern__mobile-menu[hidden] {
@@ -7071,14 +7109,15 @@ html {
   .site-header__dock .atd-modern__mobile-menu a {
     display: flex;
     min-height: 44px;
-    padding: 10px 12px;
+    padding: 10px 14px;
     align-items: center;
     justify-content: space-between;
-    border-radius: var(--radius-small);
+    border-radius: 12px;
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
+    transition: background-color 160ms ease;
   }
 
   .site-header__dock .atd-modern__mobile-menu .atd-modern__mobile-label {
@@ -7555,13 +7594,18 @@ html {
   }
 
   .site-header__dock .atd-modern__bar {
+    width: calc(100% - 16px);
     gap: 6px;
-    padding-inline: 9px;
+    padding-inline: 12px;
+  }
+
+  .site-header__dock .atd-modern__mobile-menu:not([hidden]) {
+    width: calc(100% - 16px);
   }
 
   .site-header__dock .atd-modern__menu-toggle {
-    min-height: 40px;
-    padding-inline: 9px;
+    min-height: 38px;
+    padding-inline: 10px;
     gap: 6px;
     font-size: 13px;
   }
