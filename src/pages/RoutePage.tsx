@@ -485,12 +485,6 @@ function IndividualsPage() {
             </p>
           </article>
         </div>
-
-        <div className="individual-steps__cta-wrap">
-          <a className="button button-primary" href="/apply/individual">
-            Apply for my own check <span aria-hidden="true">→</span>
-          </a>
-        </div>
       </section>
 
       {/* ── Individual Check Pricing ── */}

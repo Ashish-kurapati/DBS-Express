@@ -34,9 +34,6 @@ export function IndividualJourneySections() {
             </article>
           ))}
         </div>
-        <a className="button button-primary individual-journey-cta" href="/apply/individual">
-          Apply for my own check <span aria-hidden="true">→</span>
-        </a>
       </section>
 
       {/* Redesigned Premium DBS Service Targets & Geographic Coverage */}
