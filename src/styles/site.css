@@ -2225,6 +2225,7 @@ input:focus-visible {
 .route-table {
   width: 100%;
   min-width: 600px;
+  min-width: 720px;
   border-collapse: collapse;
   color: var(--deep-charcoal);
   font-size: 13px;
@@ -9147,17 +9148,53 @@ html {
 }
 
 /* Pricing Page Tables Stack */
+/* ═══════════════════════════════════════════════════════════════
+   PRICING PAGE — flatten double-card nesting
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Outer wrapper: no card styling – becomes a plain vertical stack */
+.route-page--pricing .route-price-card {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Section heading sits flush at the top, aligned to content grid */
+.route-page--pricing .route-price-card>h2 {
+  margin: 0 0 6px;
+  font-size: clamp(20px, 2.2vw, 26px);
+  letter-spacing: -0.03em;
+  color: var(--deep-charcoal);
+}
+
+.route-page--pricing .route-price-card>p {
+  margin: 0 0 20px;
+  color: var(--mid-charcoal);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Stack of pricing table blocks */
 .pricing-tables-stack {
   display: grid;
   gap: 28px;
   margin-top: 24px;
+  gap: 24px;
+  margin-top: 0;
 }
 
+/* Each inner block: single bordered card */
 .pricing-table-block {
   padding: 18px 20px;
+  padding: 20px 24px;
   border: 1px solid var(--border-grey);
   border-radius: var(--radius-medium);
   background: var(--pure-white);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .pricing-table-block h3 {
@@ -9165,12 +9202,24 @@ html {
   color: var(--deep-charcoal);
   font-size: 17px;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .pricing-table-subtitle {
   margin: 0 0 16px;
+  margin: 0 0 14px;
   color: var(--mid-charcoal);
   font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Table wrapper fills the block – no extra outer border overlap */
+.pricing-table-block .route-table-wrap {
+  margin-top: 0;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border-grey);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
