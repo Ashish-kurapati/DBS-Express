@@ -6625,45 +6625,52 @@ html {
   --pure-white: #FFFFFF;
   --mint-white: #EEF7F3;
   --dock-gold: #037554;
-  z-index: 10;
+  position: relative;
+  z-index: 50;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: var(--deep-charcoal);
 }
 
 .site-header__dock .animated-top-dock-component.atd-modern.dbs-top-dock {
   width: 100%;
-  height: 100px;
-  min-height: 100px;
+  height: auto;
+  min-height: 0;
   overflow: visible;
   color: #FFFFFF;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(3, 117, 84, 0.28), transparent 68%),
-    var(--deep-charcoal);
+  background: transparent;
 }
 
 .site-header__dock .atd-modern__aurora {
-  inset: -20% -8% auto;
-  height: 90%;
-  opacity: 0.75;
-  background:
-    radial-gradient(52% 72% at 18% 20%, rgba(3, 117, 84, 0.35), transparent 72%),
-    radial-gradient(36% 58% at 82% 8%, rgba(204, 235, 224, 0.2), transparent 74%),
-    radial-gradient(40% 48% at 52% 0%, rgba(255, 255, 255, 0.06), transparent 76%);
+  display: none !important;
 }
 
 .site-header__dock .atd-modern__bar {
-  top: 50%;
-  width: min(1240px, calc(100% - 48px));
-  max-width: none;
-  gap: clamp(12px, 2.4vw, 36px);
-  padding: 5px 8px 5px 18px;
-  border-color: rgba(255, 255, 255, 0.12);
-  background: linear-gradient(180deg, #2b333c, #1D232A);
-  box-shadow: 0 20px 48px -20px rgba(0, 0, 0, 0.65), inset 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  min-height: 72px;
+  height: 72px;
+  border-radius: 0;
+  border: none;
+  gap: clamp(12px, 2vw, 32px);
+  padding: 0 clamp(16px, 3.5vw, 48px);
+  background: var(--deep-charcoal);
+  box-shadow: none;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   color: #FFFFFF;
-  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.site-header__dock .atd-modern__dock {
+  margin-inline: auto;
+  gap: clamp(2px, 0.35vw, 6px);
 }
 
 .site-header__dock .atd-modern__brand {
@@ -6938,23 +6945,56 @@ html {
   white-space: nowrap;
 }
 
+@media (max-width: 1260px) and (min-width: 921px) {
+  .site-header__dock .atd-modern__bar {
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .site-header__dock .atd-modern__dock {
+    gap: 3px;
+  }
+
+  .site-header__dock .atd-modern__item {
+    padding: 0 8px;
+    gap: 5px;
+  }
+
+  .site-header__dock .atd-modern__item>span:last-child {
+    font-size: 13px;
+  }
+
+  .site-header__dock .atd-modern__ghost {
+    padding: 0 10px;
+  }
+
+  .site-header__dock .atd-modern__cta {
+    padding: 0 12px;
+    gap: 6px;
+  }
+}
+
 @media (max-width: 920px) {
   .site-header__dock .animated-top-dock-component.atd-modern.dbs-top-dock {
     position: relative;
     height: auto;
-    min-height: 76px;
+    min-height: 0;
   }
 
   .site-header__dock .atd-modern__bar {
     position: relative;
-    left: auto;
-    top: auto;
-    width: calc(100% - 20px);
+    left: 0;
+    top: 0;
+    width: 100%;
     min-height: 64px;
+    height: 64px;
     gap: 10px;
-    margin: 8px auto 0;
-    padding: 4px 10px 4px 14px;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    padding: 0 16px;
     transform: none;
+    box-sizing: border-box;
   }
 
   .site-header__dock .atd-modern__brand {
@@ -7010,14 +7050,18 @@ html {
 
   .site-header__dock .atd-modern__mobile-menu:not([hidden]) {
     display: grid;
-    width: calc(100% - 20px);
+    width: 100%;
     gap: 2px;
-    margin: 8px auto 12px;
-    padding: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: var(--radius-medium);
+    margin: 0;
+    padding: 10px 16px 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
     background: var(--deep-charcoal);
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+    box-sizing: border-box;
   }
 
   .site-header__dock .atd-modern__mobile-menu[hidden] {
