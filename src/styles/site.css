@@ -9289,26 +9289,22 @@ html {
   pointer-events: none;
   overflow: hidden;
   /* Premium photographic mask: crystal-clear on the right, smoothly fading to transparent on the left */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.02) 6%,
-    rgba(0, 0, 0, 0.18) 16%,
-    rgba(0, 0, 0, 0.55) 26%,
-    rgba(0, 0, 0, 0.88) 35%,
-    #000000 42%,
-    #000000 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.02) 6%,
-    rgba(0, 0, 0, 0.18) 16%,
-    rgba(0, 0, 0, 0.55) 26%,
-    rgba(0, 0, 0, 0.88) 35%,
-    #000000 42%,
-    #000000 100%
-  );
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 6%,
+      rgba(0, 0, 0, 0.18) 16%,
+      rgba(0, 0, 0, 0.55) 26%,
+      rgba(0, 0, 0, 0.88) 35%,
+      #000000 42%,
+      #000000 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 6%,
+      rgba(0, 0, 0, 0.18) 16%,
+      rgba(0, 0, 0, 0.55) 26%,
+      rgba(0, 0, 0, 0.88) 35%,
+      #000000 42%,
+      #000000 100%);
 }
 
 /* The actual photograph */
@@ -9352,24 +9348,20 @@ html {
 
   .hero-bg-photo {
     width: 60vw;
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.02) 8%,
-      rgba(0, 0, 0, 0.25) 20%,
-      rgba(0, 0, 0, 0.7) 32%,
-      #000000 44%,
-      #000000 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.02) 8%,
-      rgba(0, 0, 0, 0.25) 20%,
-      rgba(0, 0, 0, 0.7) 32%,
-      #000000 44%,
-      #000000 100%
-    );
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.02) 8%,
+        rgba(0, 0, 0, 0.25) 20%,
+        rgba(0, 0, 0, 0.7) 32%,
+        #000000 44%,
+        #000000 100%);
+    mask-image: linear-gradient(to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.02) 8%,
+        rgba(0, 0, 0, 0.25) 20%,
+        rgba(0, 0, 0, 0.7) 32%,
+        #000000 44%,
+        #000000 100%);
   }
 
   .hero-bg-img {
@@ -9406,20 +9398,16 @@ html {
     top: auto;
     bottom: auto;
     /* Soft vertical mask fade so it blends into the page top and bottom */
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000000 12%,
-      #000000 88%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000000 12%,
-      #000000 88%,
-      transparent 100%
-    );
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        #000000 12%,
+        #000000 88%,
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        #000000 12%,
+        #000000 88%,
+        transparent 100%);
   }
 
   .hero-bg-img {
@@ -9871,11 +9859,16 @@ html {
 .pricing-section {
   width: min(100% - (var(--page-gutter) * 2), var(--content-width));
   margin-inline: auto;
-  padding-block: clamp(28px, 3.5vw, 44px);
+  padding-block: clamp(36px, 4.5vw, 56px);
+  padding-inline: 0;
+  background: transparent;
+  box-sizing: border-box;
 }
 
 .pricing-section__header {
-  margin-bottom: 20px;
+  max-width: none;
+  width: 100%;
+  margin: 0 0 clamp(20px, 2.5vw, 28px) 0;
   text-align: left;
 }
 
@@ -9899,27 +9892,29 @@ html {
 }
 
 .pricing-section__header h2 {
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-size: clamp(22px, 2.4vw, 30px);
   font-weight: 700;
   color: var(--dark-charcoal);
   letter-spacing: -0.03em;
   line-height: 1.15;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 
 .pricing-section__subtitle {
   color: var(--mid-charcoal);
-  font-size: 13.5px;
+  font-size: 14px;
   margin: 0;
-  max-width: 580px;
+  max-width: 620px;
   line-height: 1.55;
 }
 
 .pricing-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 420px));
-  gap: 20px;
-  justify-content: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.5vw, 28px);
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
 }
 
 .pricing-card {

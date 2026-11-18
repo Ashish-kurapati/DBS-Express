@@ -123,7 +123,7 @@ function CheckTypesSection() {
 
 function PricingSection() {
   return (
-    <section className="pricing-section section-pad reveal-on-scroll" id="pricing" aria-labelledby="pricing-title">
+    <section className="pricing-section reveal-on-scroll" id="pricing" aria-labelledby="pricing-title">
       <div className="pricing-section__header">
         <p className="eyebrow"><span /> PRICING</p>
         <h2 id="pricing-title">See your check price.</h2>
