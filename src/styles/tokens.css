@@ -28,6 +28,7 @@
 
   /* Emerald 2 – Brand emerald: Primary action (Main buttons: Apply now, Get started; links, icons, active nav item, step numbers) */
   --brand-emerald: #037554;
+  --color-emerald: #037554;
   --color-brand-accent: #037554;
   --color-accent: #037554;
   --color-action: #037554;
@@ -96,12 +97,12 @@
   --space-8: 48px;
 
   /* Layout Containers */
-  --content-width: 1120px;
+  --content-width: 1240px;
   --page-gutter: clamp(16px, 2.5vw, 32px);
-  --container-wide: 1120px;
-  --container-standard: 1060px;
+  --container-wide: 1240px;
+  --container-standard: 1200px;
   --container-reading: 720px;
-  --container-header: 1120px;
+  --container-header: 1240px;
   --container-gutter: clamp(16px, 2.5vw, 32px);
 
   /* ═══════════════════════════════════════════════════════════════════════════
